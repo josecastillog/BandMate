@@ -17,6 +17,9 @@
 		268BF953286EACC900432CC8 /* BandMateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 268BF952286EACC900432CC8 /* BandMateTests.m */; };
 		268BF95D286EACCA00432CC8 /* BandMateUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 268BF95C286EACCA00432CC8 /* BandMateUITests.m */; };
 		268BF95F286EACCA00432CC8 /* BandMateUITestsLaunchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 268BF95E286EACCA00432CC8 /* BandMateUITestsLaunchTests.m */; };
+		5C72A3C66FC5E586513329F1 /* Pods_BandMateTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7A9C3377856E079D48F0EA7 /* Pods_BandMateTests.framework */; };
+		C4FF536DBC51E249F46D9CE2 /* Pods_BandMate_BandMateUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0A01756A7A60FC84ED7C4D /* Pods_BandMate_BandMateUITests.framework */; };
+		D6930D9DF78C1EB3950B33B9 /* Pods_BandMate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28848E6C1F75558C0A4E7223 /* Pods_BandMate.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1F0A01756A7A60FC84ED7C4D /* Pods_BandMate_BandMateUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BandMate_BandMateUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		268BF933286EACC900432CC8 /* BandMate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BandMate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		268BF936286EACC900432CC8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		268BF937286EACC900432CC8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -54,6 +58,14 @@
 		268BF958286EACC900432CC8 /* BandMateUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BandMateUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		268BF95C286EACCA00432CC8 /* BandMateUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BandMateUITests.m; sourceTree = "<group>"; };
 		268BF95E286EACCA00432CC8 /* BandMateUITestsLaunchTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BandMateUITestsLaunchTests.m; sourceTree = "<group>"; };
+		28848E6C1F75558C0A4E7223 /* Pods_BandMate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BandMate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4C64F94841F4852B272F0DEE /* Pods-BandMate-BandMateUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BandMate-BandMateUITests.release.xcconfig"; path = "Target Support Files/Pods-BandMate-BandMateUITests/Pods-BandMate-BandMateUITests.release.xcconfig"; sourceTree = "<group>"; };
+		5163B7A8B0C4F4FC41874437 /* Pods-BandMateTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BandMateTests.release.xcconfig"; path = "Target Support Files/Pods-BandMateTests/Pods-BandMateTests.release.xcconfig"; sourceTree = "<group>"; };
+		528E187E09DD89DEE6B4911B /* Pods-BandMateTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BandMateTests.debug.xcconfig"; path = "Target Support Files/Pods-BandMateTests/Pods-BandMateTests.debug.xcconfig"; sourceTree = "<group>"; };
+		A061199D6EA3D9E262043FC1 /* Pods-BandMate.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BandMate.release.xcconfig"; path = "Target Support Files/Pods-BandMate/Pods-BandMate.release.xcconfig"; sourceTree = "<group>"; };
+		BF20C98779348012D9F3F6A8 /* Pods-BandMate.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BandMate.debug.xcconfig"; path = "Target Support Files/Pods-BandMate/Pods-BandMate.debug.xcconfig"; sourceTree = "<group>"; };
+		DFAC38CAA0461B10D2977160 /* Pods-BandMate-BandMateUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BandMate-BandMateUITests.debug.xcconfig"; path = "Target Support Files/Pods-BandMate-BandMateUITests/Pods-BandMate-BandMateUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		F7A9C3377856E079D48F0EA7 /* Pods_BandMateTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BandMateTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D6930D9DF78C1EB3950B33B9 /* Pods_BandMate.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,6 +81,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C72A3C66FC5E586513329F1 /* Pods_BandMateTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,6 +89,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C4FF536DBC51E249F46D9CE2 /* Pods_BandMate_BandMateUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,6 +103,8 @@
 				268BF951286EACC900432CC8 /* BandMateTests */,
 				268BF95B286EACC900432CC8 /* BandMateUITests */,
 				268BF934286EACC900432CC8 /* Products */,
+				C73D4EC51962B04B2BB9FCFB /* Pods */,
+				B8B117D2911EF6703A8C9DDC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -136,6 +153,30 @@
 			path = BandMateUITests;
 			sourceTree = "<group>";
 		};
+		B8B117D2911EF6703A8C9DDC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				28848E6C1F75558C0A4E7223 /* Pods_BandMate.framework */,
+				1F0A01756A7A60FC84ED7C4D /* Pods_BandMate_BandMateUITests.framework */,
+				F7A9C3377856E079D48F0EA7 /* Pods_BandMateTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C73D4EC51962B04B2BB9FCFB /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				BF20C98779348012D9F3F6A8 /* Pods-BandMate.debug.xcconfig */,
+				A061199D6EA3D9E262043FC1 /* Pods-BandMate.release.xcconfig */,
+				DFAC38CAA0461B10D2977160 /* Pods-BandMate-BandMateUITests.debug.xcconfig */,
+				4C64F94841F4852B272F0DEE /* Pods-BandMate-BandMateUITests.release.xcconfig */,
+				528E187E09DD89DEE6B4911B /* Pods-BandMateTests.debug.xcconfig */,
+				5163B7A8B0C4F4FC41874437 /* Pods-BandMateTests.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -143,6 +184,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 268BF962286EACCA00432CC8 /* Build configuration list for PBXNativeTarget "BandMate" */;
 			buildPhases = (
+				52DF406CAD0B905EAB5A3C1D /* [CP] Check Pods Manifest.lock */,
 				268BF92F286EACC900432CC8 /* Sources */,
 				268BF930286EACC900432CC8 /* Frameworks */,
 				268BF931286EACC900432CC8 /* Resources */,
@@ -160,6 +202,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 268BF965286EACCA00432CC8 /* Build configuration list for PBXNativeTarget "BandMateTests" */;
 			buildPhases = (
+				09BF4232A615E281375B115C /* [CP] Check Pods Manifest.lock */,
 				268BF94A286EACC900432CC8 /* Sources */,
 				268BF94B286EACC900432CC8 /* Frameworks */,
 				268BF94C286EACC900432CC8 /* Resources */,
@@ -178,6 +221,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 268BF968286EACCA00432CC8 /* Build configuration list for PBXNativeTarget "BandMateUITests" */;
 			buildPhases = (
+				E8FBD288D48EBBDF544E2294 /* [CP] Check Pods Manifest.lock */,
 				268BF954286EACC900432CC8 /* Sources */,
 				268BF955286EACC900432CC8 /* Frameworks */,
 				268BF956286EACC900432CC8 /* Resources */,
@@ -260,6 +304,75 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		09BF4232A615E281375B115C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BandMateTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		52DF406CAD0B905EAB5A3C1D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BandMate-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E8FBD288D48EBBDF544E2294 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BandMate-BandMateUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		268BF92F286EACC900432CC8 /* Sources */ = {
@@ -437,6 +550,7 @@
 		};
 		268BF963286EACCA00432CC8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BF20C98779348012D9F3F6A8 /* Pods-BandMate.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -464,6 +578,7 @@
 		};
 		268BF964286EACCA00432CC8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A061199D6EA3D9E262043FC1 /* Pods-BandMate.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -491,6 +606,7 @@
 		};
 		268BF966286EACCA00432CC8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 528E187E09DD89DEE6B4911B /* Pods-BandMateTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -509,6 +625,7 @@
 		};
 		268BF967286EACCA00432CC8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5163B7A8B0C4F4FC41874437 /* Pods-BandMateTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -527,6 +644,7 @@
 		};
 		268BF969286EACCA00432CC8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DFAC38CAA0461B10D2977160 /* Pods-BandMate-BandMateUITests.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -543,6 +661,7 @@
 		};
 		268BF96A286EACCA00432CC8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4C64F94841F4852B272F0DEE /* Pods-BandMate-BandMateUITests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;

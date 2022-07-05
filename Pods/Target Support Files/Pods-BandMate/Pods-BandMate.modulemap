@@ -1,0 +1,6 @@
+framework module Pods_BandMate {
+  umbrella header "Pods-BandMate-umbrella.h"
+
+  export *
+  module * { export * }
+}
