@@ -173,7 +173,6 @@
 				528E187E09DD89DEE6B4911B /* Pods-BandMateTests.debug.xcconfig */,
 				5163B7A8B0C4F4FC41874437 /* Pods-BandMateTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -188,6 +187,7 @@
 				268BF92F286EACC900432CC8 /* Sources */,
 				268BF930286EACC900432CC8 /* Frameworks */,
 				268BF931286EACC900432CC8 /* Resources */,
+				C0F2B201CC83FD178F07C8D0 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -225,6 +225,7 @@
 				268BF954286EACC900432CC8 /* Sources */,
 				268BF955286EACC900432CC8 /* Frameworks */,
 				268BF956286EACC900432CC8 /* Resources */,
+				D4032BD6CE142B0A1036D50A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -348,6 +349,40 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C0F2B201CC83FD178F07C8D0 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BandMate/Pods-BandMate-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BandMate/Pods-BandMate-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BandMate/Pods-BandMate-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D4032BD6CE142B0A1036D50A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BandMate-BandMateUITests/Pods-BandMate-BandMateUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BandMate-BandMateUITests/Pods-BandMate-BandMateUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BandMate-BandMateUITests/Pods-BandMate-BandMateUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E8FBD288D48EBBDF544E2294 /* [CP] Check Pods Manifest.lock */ = {
