@@ -141,24 +141,24 @@
             </objects>
             <point key="canvasLocation" x="1786" y="1564"/>
         </scene>
-        <!--View Controller-->
+        <!--Profile View Controller-->
         <scene sceneID="zeA-18-93Q">
             <objects>
-                <viewController id="zgC-XC-E7l" sceneMemberID="viewController">
+                <viewController id="zgC-XC-E7l" customClass="ProfileViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lBe-Qz-g3T">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sEK-xI-FtA">
                                 <rect key="frame" x="130" y="397" width="131" height="51"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="sEK-xI-FtA" secondAttribute="height" multiplier="131:51" id="Me0-kG-KTb"/>
-                                </constraints>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="gray" title="Logout">
                                     <color key="baseBackgroundColor" name="AccentColor"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="didTapLogout:" destination="zgC-XC-E7l" eventType="touchUpInside" id="Ac2-TO-Cyj"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="uz3-Ua-2Xi"/>
@@ -237,7 +237,7 @@
         <!--Login View Controller-->
         <scene sceneID="yNP-lI-jYQ">
             <objects>
-                <viewController id="PRv-0P-KEY" customClass="LoginViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" id="PRv-0P-KEY" customClass="LoginViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nNB-dZ-CSj">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -341,7 +341,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="qvg-kw-f6E"/>
+        <segue reference="CqK-es-XeE"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="guitars" catalog="system" width="128" height="100"/>
