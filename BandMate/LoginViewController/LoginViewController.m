@@ -34,6 +34,7 @@
                         [self alert:@"Incorrect username or password."];
                     } else {
                         NSLog(@"User logged in successfully");
+                        [self performSegueWithIdentifier:@"afterLoginSegue" sender:(id)sender];
                     }
         }];
     }

@@ -51,13 +51,13 @@
                     NSLog(@"Error: %@", error.localizedDescription);
                 } else {
                     NSLog(@"User registered successfully");
+                    [self performSegueWithIdentifier:@"afterRegisterSegue" sender:(id)sender];
                 }
             }];
             
         } else {
             
             [self alert:@"Password do not match."];
-            
         }
     }
 }
