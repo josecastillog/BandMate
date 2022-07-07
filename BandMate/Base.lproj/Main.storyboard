@@ -3,6 +3,7 @@
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -33,7 +34,7 @@
                                 <rect key="frame" x="71" y="387" width="248" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" textContentType="password"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Instument" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ur3-dU-0Xh">
                                 <rect key="frame" x="71" y="471" width="248" height="34"/>
@@ -45,7 +46,7 @@
                                 <rect key="frame" x="70" y="429" width="248" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" textContentType="password"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Expertise Level" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yL0-yX-gHE">
                                 <rect key="frame" x="70" y="513" width="248" height="34"/>
@@ -61,6 +62,9 @@
                                 <buttonConfiguration key="configuration" style="gray" title="Sign Up">
                                     <color key="baseBackgroundColor" systemColor="linkColor"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <segue destination="pOh-CM-ox3" kind="presentation" identifier="afterRegisterSegue" modalPresentationStyle="fullScreen" id="WE4-eO-PvI"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -86,7 +90,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PmB-VI-gLM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-188" y="1568"/>
+            <point key="canvasLocation" x="797" y="1564"/>
         </scene>
         <!--Match-->
         <scene sceneID="dUM-WC-6UB">
@@ -105,7 +109,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3q8-rc-Ypq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-188" y="848"/>
+            <point key="canvasLocation" x="797" y="844"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="O6Z-gA-ljO">
@@ -121,7 +125,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tgi-3H-HQ7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="800" y="1568"/>
+            <point key="canvasLocation" x="1786" y="1564"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="zeA-18-93Q">
@@ -130,19 +134,38 @@
                     <view key="view" contentMode="scaleToFill" id="lBe-Qz-g3T">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sEK-xI-FtA">
+                                <rect key="frame" x="130" y="397" width="131" height="51"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="sEK-xI-FtA" secondAttribute="height" multiplier="131:51" id="Me0-kG-KTb"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="gray" title="Logout">
+                                    <color key="baseBackgroundColor" name="AccentColor"/>
+                                </buttonConfiguration>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="uz3-Ua-2Xi"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="uz3-Ua-2Xi" firstAttribute="trailing" secondItem="sEK-xI-FtA" secondAttribute="trailing" constant="129" id="165-ER-ZsX"/>
+                            <constraint firstItem="uz3-Ua-2Xi" firstAttribute="bottom" secondItem="sEK-xI-FtA" secondAttribute="bottom" constant="313" id="8gU-qO-vew"/>
+                            <constraint firstItem="sEK-xI-FtA" firstAttribute="top" secondItem="uz3-Ua-2Xi" secondAttribute="top" constant="309" id="kTU-4x-aRw"/>
+                            <constraint firstItem="sEK-xI-FtA" firstAttribute="leading" secondItem="uz3-Ua-2Xi" secondAttribute="leading" constant="130" id="qE4-0I-26v"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="cOg-eU-SQT"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MsI-hY-Cwd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1783" y="1567"/>
+            <point key="canvasLocation" x="2767.6923076923076" y="1562.5592417061612"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="9Fv-mg-oWY">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="pOh-CM-ox3" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="HomeViewController" automaticallyAdjustsScrollViewInsets="NO" id="pOh-CM-ox3" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="1if-JV-5v0">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
@@ -176,7 +199,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dwo-Ek-Tpt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="800" y="848"/>
+            <point key="canvasLocation" x="1786" y="844"/>
         </scene>
         <!--Profile-->
         <scene sceneID="QKu-jv-H1a">
@@ -195,7 +218,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pjc-5j-8Dz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1781" y="848"/>
+            <point key="canvasLocation" x="2766" y="844"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="yNP-lI-jYQ">
@@ -219,7 +242,7 @@
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8mz-Yx-CyW">
                                 <rect key="frame" x="71" y="371.66666666666669" width="248" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" textContentType="password"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x7b-bG-aJM">
                                 <rect key="frame" x="71" y="425.66666666666669" width="248" height="31"/>
@@ -242,7 +265,7 @@
                                     <color key="baseBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <segue destination="zmZ-wP-Bvv" kind="presentation" id="6iW-6E-6xj"/>
+                                    <segue destination="zmZ-wP-Bvv" kind="presentation" id="GOU-cj-ooX"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -270,10 +293,13 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="9Jj-zV-dAb"/>
+                    <connections>
+                        <segue destination="pOh-CM-ox3" kind="presentation" identifier="afterLoginSegue" modalPresentationStyle="fullScreen" id="CqK-es-XeE"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6zH-vT-5Qz" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1118" y="107"/>
+            <point key="canvasLocation" x="800" y="-633"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="7Ox-hh-Iap">
@@ -295,10 +321,16 @@
             <point key="canvasLocation" x="-129" y="107"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="WE4-eO-PvI"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="guitars" catalog="system" width="128" height="100"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>
+        <namedColor name="AccentColor">
+            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="linkColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
