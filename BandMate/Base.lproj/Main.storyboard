@@ -63,7 +63,7 @@
                                 <rect key="frame" x="71" y="383" width="248" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" textContentType="password"/>
+                                <textInputTraits key="textInputTraits" textContentType="email"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lvb-xS-fky">
                                 <rect key="frame" x="71" y="425" width="248" height="34"/>
@@ -341,7 +341,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="CqK-es-XeE"/>
+        <segue reference="qvg-kw-f6E"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="guitars" catalog="system" width="128" height="100"/>
