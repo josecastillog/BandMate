@@ -6,6 +6,7 @@ target 'BandMate' do
   use_frameworks!
 
   # Pods for BandMate
+  pod 'Parse'
 
   target 'BandMateTests' do
     inherit! :search_paths
