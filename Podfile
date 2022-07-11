@@ -7,6 +7,7 @@ target 'BandMate' do
 
   # Pods for BandMate
   pod 'Parse'
+  pod 'AppAuth'
 
   target 'BandMateTests' do
     inherit! :search_paths
