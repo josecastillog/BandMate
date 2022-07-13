@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		263CC3BA287F29E0002941BB /* Artist.m in Sources */ = {isa = PBXBuildFile; fileRef = 263CC3B9287F29E0002941BB /* Artist.m */; };
 		263F2C8C2876559D00A28601 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 263F2C8B2876559D00A28601 /* LoginViewController.m */; };
 		263F2C8F287655A800A28601 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 263F2C8E287655A800A28601 /* RegisterViewController.m */; };
 		263F2C932877564C00A28601 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 263F2C922877564C00A28601 /* ProfileViewController.m */; };
@@ -46,6 +47,8 @@
 
 /* Begin PBXFileReference section */
 		1F0A01756A7A60FC84ED7C4D /* Pods_BandMate_BandMateUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BandMate_BandMateUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		263CC3B8287F29E0002941BB /* Artist.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Artist.h; sourceTree = "<group>"; };
+		263CC3B9287F29E0002941BB /* Artist.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Artist.m; sourceTree = "<group>"; };
 		263F2C8A2876559D00A28601 /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		263F2C8B2876559D00A28601 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		263F2C8D287655A800A28601 /* RegisterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
@@ -110,6 +113,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		263CC3B7287F29BC002941BB /* DataModels */ = {
+			isa = PBXGroup;
+			children = (
+				263CC3B8287F29E0002941BB /* Artist.h */,
+				263CC3B9287F29E0002941BB /* Artist.m */,
+			);
+			path = DataModels;
+			sourceTree = "<group>";
+		};
 		263F2C882876557100A28601 /* LoginViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -162,6 +174,7 @@
 		268BF935286EACC900432CC8 /* BandMate */ = {
 			isa = PBXGroup;
 			children = (
+				263CC3B7287F29BC002941BB /* DataModels */,
 				26B782BA287CEB2B004B0ADC /* MatchViewController */,
 				263F2C902877562200A28601 /* ProfileViewController */,
 				263F2C892876558800A28601 /* RegisterViewController */,
@@ -477,6 +490,7 @@
 				26B782BD287CEB49004B0ADC /* MatchViewController.m in Sources */,
 				263F2C932877564C00A28601 /* ProfileViewController.m in Sources */,
 				268BF93B286EACC900432CC8 /* SceneDelegate.m in Sources */,
+				263CC3BA287F29E0002941BB /* Artist.m in Sources */,
 				263F2C8C2876559D00A28601 /* LoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

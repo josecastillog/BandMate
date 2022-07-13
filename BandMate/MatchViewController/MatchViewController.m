@@ -6,8 +6,10 @@
 //
 
 #import "MatchViewController.h"
-#import "AppAuth.h"
 #import "AppDelegate.h"
+#import "Artist.h"
+#import "AppAuth.h"
+#import "Parse/Parse.h"
 
 // Spotify OAuth 2.0 configuration
 static NSString *kClientID;
@@ -20,6 +22,7 @@ static NSString *const scope = @"user-top-read";
 @property (weak, nonatomic) IBOutlet UIButton *connectButton;
 @property (weak, nonatomic) IBOutlet UIButton *disconnectButton;
 @property (weak, nonatomic) IBOutlet UIButton *apiCallButton;
+@property (strong, nonatomic) NSArray *arrayOfArtists;
 @property(strong, nonatomic, nullable) OIDAuthState *authState;
 @end
 
@@ -147,7 +150,7 @@ static NSString *const scope = @"user-top-read";
             NSString *token = @"Bearer ";
             NSString *authHeader = [token stringByAppendingString:accessToken];
             
-            [request setURL:[NSURL URLWithString:@"https://api.spotify.com/v1/me/top/artists"]];
+            [request setURL:[NSURL URLWithString:@"https://api.spotify.com/v1/me/top/artists?time_range=long_term&limit=50"]];
             [request setHTTPMethod:@"GET"];
             [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
             [request setValue:authHeader forHTTPHeaderField:@"Authorization"];
@@ -155,11 +158,43 @@ static NSString *const scope = @"user-top-read";
             NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
             
             [[session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                
                 if (error) {
                     NSLog(@"Error: %@", [error localizedDescription]);
+                    return;
                 }
-                NSString *requestReply = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
-                NSLog(@"Request reply: %@", requestReply);
+                
+                NSDictionary *dataDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+                NSArray *arrayOfDictionaries = dataDictionary[@"items"];
+                
+                // Creates array of Artist object
+                self.arrayOfArtists = [Artist artistsWithArray:arrayOfDictionaries];
+                
+                // Saves artists to DB
+                [PFObject saveAllInBackground:self.arrayOfArtists block:^(BOOL succeeded, NSError * _Nullable error) {
+                    if (error) {
+                        NSLog(@"Error saving array of artists: %@", [error localizedDescription]);
+                    } else {
+                        NSLog(@"Successfully saved array of artists");
+                    }
+                }];
+                
+                NSArray *arrayOfGenres = [Artist userGenresWithArray:self.arrayOfArtists];
+                NSArray *arrayOfArtistID = [Artist userArtistIDsWithArray:self.arrayOfArtists];
+                
+                [PFUser.currentUser setObject:arrayOfGenres forKey:@"fav_genres"];
+                [PFUser.currentUser setObject:arrayOfArtistID forKey:@"fav_artists"];
+                
+                // Saves fav_genres and fav_artists to user in DB
+                [PFUser.currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                    
+                    if (error) {
+                        NSLog(@"Error saving favorite artists and genres: %@", [error localizedDescription]);
+                    } else {
+                        NSLog(@"Successfully saved fav artists and genres");
+                    }
+                                    
+                }];
 
             }] resume];
         }
