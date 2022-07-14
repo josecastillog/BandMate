@@ -38,7 +38,7 @@ static NSString *const scope = @"user-top-read";
     NSString *path = [[NSBundle mainBundle] pathForResource: @"Keys" ofType: @"plist"];
     NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile: path];
 
-    kClientID = [dict objectForKey: @"client_ID"];
+    kClientID = [dict objectForKey: @"client_ID_spotify"];
     
     [self loadState];
     
