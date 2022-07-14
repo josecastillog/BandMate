@@ -20,6 +20,8 @@
 		268BF953286EACC900432CC8 /* BandMateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 268BF952286EACC900432CC8 /* BandMateTests.m */; };
 		268BF95D286EACCA00432CC8 /* BandMateUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 268BF95C286EACCA00432CC8 /* BandMateUITests.m */; };
 		268BF95F286EACCA00432CC8 /* BandMateUITestsLaunchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 268BF95E286EACCA00432CC8 /* BandMateUITestsLaunchTests.m */; };
+		26B782BD287CEB49004B0ADC /* MatchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26B782BC287CEB49004B0ADC /* MatchViewController.m */; };
+		26B782C1287DE607004B0ADC /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 26B782C0287DE607004B0ADC /* Keys.plist */; };
 		5C72A3C66FC5E586513329F1 /* Pods_BandMateTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7A9C3377856E079D48F0EA7 /* Pods_BandMateTests.framework */; };
 		C4FF536DBC51E249F46D9CE2 /* Pods_BandMate_BandMateUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0A01756A7A60FC84ED7C4D /* Pods_BandMate_BandMateUITests.framework */; };
 		D6930D9DF78C1EB3950B33B9 /* Pods_BandMate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28848E6C1F75558C0A4E7223 /* Pods_BandMate.framework */; };
@@ -67,6 +69,9 @@
 		268BF958286EACC900432CC8 /* BandMateUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BandMateUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		268BF95C286EACCA00432CC8 /* BandMateUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BandMateUITests.m; sourceTree = "<group>"; };
 		268BF95E286EACCA00432CC8 /* BandMateUITestsLaunchTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BandMateUITestsLaunchTests.m; sourceTree = "<group>"; };
+		26B782BB287CEB49004B0ADC /* MatchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MatchViewController.h; sourceTree = "<group>"; };
+		26B782BC287CEB49004B0ADC /* MatchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MatchViewController.m; sourceTree = "<group>"; };
+		26B782C0287DE607004B0ADC /* Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
 		28848E6C1F75558C0A4E7223 /* Pods_BandMate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BandMate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C64F94841F4852B272F0DEE /* Pods-BandMate-BandMateUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BandMate-BandMateUITests.release.xcconfig"; path = "Target Support Files/Pods-BandMate-BandMateUITests/Pods-BandMate-BandMateUITests.release.xcconfig"; sourceTree = "<group>"; };
 		5163B7A8B0C4F4FC41874437 /* Pods-BandMateTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BandMateTests.release.xcconfig"; path = "Target Support Files/Pods-BandMateTests/Pods-BandMateTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -157,6 +162,7 @@
 		268BF935286EACC900432CC8 /* BandMate */ = {
 			isa = PBXGroup;
 			children = (
+				26B782BA287CEB2B004B0ADC /* MatchViewController */,
 				263F2C902877562200A28601 /* ProfileViewController */,
 				263F2C892876558800A28601 /* RegisterViewController */,
 				263F2C882876557100A28601 /* LoginViewController */,
@@ -170,6 +176,7 @@
 				268BF942286EACC900432CC8 /* Assets.xcassets */,
 				268BF944286EACC900432CC8 /* LaunchScreen.storyboard */,
 				268BF947286EACC900432CC8 /* Info.plist */,
+				26B782C0287DE607004B0ADC /* Keys.plist */,
 				268BF948286EACC900432CC8 /* main.m */,
 			);
 			path = BandMate;
@@ -190,6 +197,15 @@
 				268BF95E286EACCA00432CC8 /* BandMateUITestsLaunchTests.m */,
 			);
 			path = BandMateUITests;
+			sourceTree = "<group>";
+		};
+		26B782BA287CEB2B004B0ADC /* MatchViewController */ = {
+			isa = PBXGroup;
+			children = (
+				26B782BB287CEB49004B0ADC /* MatchViewController.h */,
+				26B782BC287CEB49004B0ADC /* MatchViewController.m */,
+			);
+			path = MatchViewController;
 			sourceTree = "<group>";
 		};
 		B8B117D2911EF6703A8C9DDC /* Frameworks */ = {
@@ -323,6 +339,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26B782C1287DE607004B0ADC /* Keys.plist in Resources */,
 				268BF946286EACC900432CC8 /* LaunchScreen.storyboard in Resources */,
 				268BF943286EACC900432CC8 /* Assets.xcassets in Resources */,
 				268BF941286EACC900432CC8 /* Main.storyboard in Resources */,
@@ -457,6 +474,7 @@
 				263F2C8F287655A800A28601 /* RegisterViewController.m in Sources */,
 				268BF938286EACC900432CC8 /* AppDelegate.m in Sources */,
 				268BF949286EACC900432CC8 /* main.m in Sources */,
+				26B782BD287CEB49004B0ADC /* MatchViewController.m in Sources */,
 				263F2C932877564C00A28601 /* ProfileViewController.m in Sources */,
 				268BF93B286EACC900432CC8 /* SceneDelegate.m in Sources */,
 				263F2C8C2876559D00A28601 /* LoginViewController.m in Sources */,
