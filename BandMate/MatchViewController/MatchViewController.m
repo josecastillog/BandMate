@@ -10,6 +10,7 @@
 #import "Artist.h"
 #import "AppAuth.h"
 #import "Parse/Parse.h"
+#import "Match.h"
 
 // Spotify OAuth 2.0 configuration
 static NSString *kClientID;
@@ -65,6 +66,10 @@ static NSString *const scope = @"user-top-read";
 
 - (IBAction)didTapApiCall:(id)sender {
     [self getTopArtists];
+}
+
+- (IBAction)didTapMatch:(id)sender {
+    [Match startMatching];
 }
 
 // Performs Spotify OAuth 2.0
@@ -150,7 +155,7 @@ static NSString *const scope = @"user-top-read";
             NSString *token = @"Bearer ";
             NSString *authHeader = [token stringByAppendingString:accessToken];
             
-            [request setURL:[NSURL URLWithString:@"https://api.spotify.com/v1/me/top/artists?time_range=long_term&limit=50"]];
+            [request setURL:[NSURL URLWithString:@"https://api.spotify.com/v1/me/top/artists?time_range=long_term&limit=20"]];
             [request setHTTPMethod:@"GET"];
             [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
             [request setValue:authHeader forHTTPHeaderField:@"Authorization"];
