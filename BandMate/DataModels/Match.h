@@ -27,4 +27,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+typedef enum {
+    Guitar,
+    Drums,
+    Singer,
+    Bass
+} Instrument;
+
 NS_ASSUME_NONNULL_END
