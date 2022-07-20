@@ -11,6 +11,7 @@
 		263F2C8C2876559D00A28601 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 263F2C8B2876559D00A28601 /* LoginViewController.m */; };
 		263F2C8F287655A800A28601 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 263F2C8E287655A800A28601 /* RegisterViewController.m */; };
 		263F2C932877564C00A28601 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 263F2C922877564C00A28601 /* ProfileViewController.m */; };
+		2652301C2884D927009FBAD2 /* Match.m in Sources */ = {isa = PBXBuildFile; fileRef = 2652301B2884D927009FBAD2 /* Match.m */; };
 		268BF938286EACC900432CC8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 268BF937286EACC900432CC8 /* AppDelegate.m */; };
 		268BF93B286EACC900432CC8 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 268BF93A286EACC900432CC8 /* SceneDelegate.m */; };
 		268BF93E286EACC900432CC8 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 268BF93D286EACC900432CC8 /* ViewController.m */; };
@@ -55,6 +56,8 @@
 		263F2C8E287655A800A28601 /* RegisterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
 		263F2C912877564C00A28601 /* ProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		263F2C922877564C00A28601 /* ProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		2652301A2884D927009FBAD2 /* Match.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Match.h; sourceTree = "<group>"; };
+		2652301B2884D927009FBAD2 /* Match.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Match.m; sourceTree = "<group>"; };
 		268BF933286EACC900432CC8 /* BandMate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BandMate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		268BF936286EACC900432CC8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		268BF937286EACC900432CC8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -118,6 +121,8 @@
 			children = (
 				263CC3B8287F29E0002941BB /* Artist.h */,
 				263CC3B9287F29E0002941BB /* Artist.m */,
+				2652301A2884D927009FBAD2 /* Match.h */,
+				2652301B2884D927009FBAD2 /* Match.m */,
 			);
 			path = DataModels;
 			sourceTree = "<group>";
@@ -484,6 +489,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				268BF93E286EACC900432CC8 /* ViewController.m in Sources */,
+				2652301C2884D927009FBAD2 /* Match.m in Sources */,
 				263F2C8F287655A800A28601 /* RegisterViewController.m in Sources */,
 				268BF938286EACC900432CC8 /* AppDelegate.m in Sources */,
 				268BF949286EACC900432CC8 /* main.m in Sources */,
