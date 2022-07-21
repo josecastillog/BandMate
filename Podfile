@@ -8,6 +8,8 @@ target 'BandMate' do
   # Pods for BandMate
   pod 'Parse'
   pod 'AppAuth'
+  pod 'Parse/UI'
+  pod 'AFNetworking'
 
   target 'BandMateTests' do
     inherit! :search_paths
