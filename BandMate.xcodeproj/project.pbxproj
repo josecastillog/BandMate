@@ -23,6 +23,8 @@
 		268BF95D286EACCA00432CC8 /* BandMateUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 268BF95C286EACCA00432CC8 /* BandMateUITests.m */; };
 		268BF95F286EACCA00432CC8 /* BandMateUITestsLaunchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 268BF95E286EACCA00432CC8 /* BandMateUITestsLaunchTests.m */; };
 		268C76A22887696D00D4E93B /* ProfileTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 268C76A12887696D00D4E93B /* ProfileTableCell.m */; };
+		26ADBDBA288E15AE00682B51 /* MatchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 26ADBDB9288E15AE00682B51 /* MatchTableViewCell.m */; };
+		26ADBDBD288E168600682B51 /* MatchCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 26ADBDBC288E168600682B51 /* MatchCollectionCell.m */; };
 		26B782BD287CEB49004B0ADC /* MatchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26B782BC287CEB49004B0ADC /* MatchViewController.m */; };
 		26B782C1287DE607004B0ADC /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 26B782C0287DE607004B0ADC /* Keys.plist */; };
 		5C72A3C66FC5E586513329F1 /* Pods_BandMateTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7A9C3377856E079D48F0EA7 /* Pods_BandMateTests.framework */; };
@@ -78,6 +80,10 @@
 		268BF95E286EACCA00432CC8 /* BandMateUITestsLaunchTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BandMateUITestsLaunchTests.m; sourceTree = "<group>"; };
 		268C76A02887696D00D4E93B /* ProfileTableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileTableCell.h; sourceTree = "<group>"; };
 		268C76A12887696D00D4E93B /* ProfileTableCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileTableCell.m; sourceTree = "<group>"; };
+		26ADBDB8288E15AE00682B51 /* MatchTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MatchTableViewCell.h; sourceTree = "<group>"; };
+		26ADBDB9288E15AE00682B51 /* MatchTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MatchTableViewCell.m; sourceTree = "<group>"; };
+		26ADBDBB288E168600682B51 /* MatchCollectionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MatchCollectionCell.h; sourceTree = "<group>"; };
+		26ADBDBC288E168600682B51 /* MatchCollectionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MatchCollectionCell.m; sourceTree = "<group>"; };
 		26B782BB287CEB49004B0ADC /* MatchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MatchViewController.h; sourceTree = "<group>"; };
 		26B782BC287CEB49004B0ADC /* MatchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MatchViewController.m; sourceTree = "<group>"; };
 		26B782C0287DE607004B0ADC /* Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
@@ -226,6 +232,10 @@
 			children = (
 				268C76A02887696D00D4E93B /* ProfileTableCell.h */,
 				268C76A12887696D00D4E93B /* ProfileTableCell.m */,
+				26ADBDB8288E15AE00682B51 /* MatchTableViewCell.h */,
+				26ADBDB9288E15AE00682B51 /* MatchTableViewCell.m */,
+				26ADBDBB288E168600682B51 /* MatchCollectionCell.h */,
+				26ADBDBC288E168600682B51 /* MatchCollectionCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -503,6 +513,7 @@
 			files = (
 				268C76A22887696D00D4E93B /* ProfileTableCell.m in Sources */,
 				268BF93E286EACC900432CC8 /* ViewController.m in Sources */,
+				26ADBDBD288E168600682B51 /* MatchCollectionCell.m in Sources */,
 				2652301C2884D927009FBAD2 /* Match.m in Sources */,
 				263F2C8F287655A800A28601 /* RegisterViewController.m in Sources */,
 				268BF938286EACC900432CC8 /* AppDelegate.m in Sources */,
@@ -512,6 +523,7 @@
 				268BF93B286EACC900432CC8 /* SceneDelegate.m in Sources */,
 				263CC3BA287F29E0002941BB /* Artist.m in Sources */,
 				263F2C8C2876559D00A28601 /* LoginViewController.m in Sources */,
+				26ADBDBA288E15AE00682B51 /* MatchTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
