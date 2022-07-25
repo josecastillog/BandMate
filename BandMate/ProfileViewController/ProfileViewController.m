@@ -6,18 +6,133 @@
 //
 
 #import "ProfileViewController.h"
+#import "ProfileTableCell.h"
 #import "Parse/Parse.h"
+#import "Artist.h"
 #import "SceneDelegate.h"
+@import Parse;
 
-@interface ProfileViewController ()
+// User table keys
+static NSString *const kUserInstrumentType = @"instrumentType";
+static NSString *const kUserName = @"name";
+static NSString *const kUserUsername = @"username";
+static NSString *const kUserProfileImage = @"profileImage";
+static NSString *const kUserFavArtist = @"fav_artists";
+// Artist table keys
+static NSString *const kArtistArtistID = @"artistID";
+// Table view
+static NSString *const kCellName = @"kArtistArtistID";
+// Storyboard
+static NSString *const kStoryboardName = @"main";
+// LoginViewController identifier
+static NSString *const kLoginViewController = @"LoginViewController";
 
+@interface ProfileViewController () <UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UIGestureRecognizerDelegate, UINavigationControllerDelegate>
+@property (strong, nonatomic) IBOutlet PFImageView *imgView;
+@property (strong, nonatomic) NSArray *arrayOfArtists;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *instrumentLabel;
+@property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @end
 
 @implementation ProfileViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    [self queryTopArtists];
+    [self setupProfile];
+}
+
+- (void)setupProfile {
+    // Profile image interaction
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self  action:@selector(tapGesture:)];
+    tapGesture.numberOfTapsRequired = 1;
+    tapGesture.delegate = self;
+    [self.imgView addGestureRecognizer:tapGesture];
+    self.imgView.userInteractionEnabled = YES;
+    // Labels
+    self.nameLabel.text = [PFUser.currentUser objectForKey:kUserName];
+    self.usernameLabel.text = [NSString stringWithFormat:@"@%@", [PFUser.currentUser objectForKey:kUserUsername]];
+    self.instrumentLabel.text = [PFUser.currentUser objectForKey:kUserInstrumentType];
+    // Profile image
+    self.imgView.layer.backgroundColor=[[UIColor clearColor] CGColor];
+    self.imgView.layer.cornerRadius = self.imgView.frame.size.height/2;
+    self.imgView.layer.borderWidth = 0.1;
+    self.imgView.clipsToBounds = YES;
+    [self setProfileImage];
+}
+
+- (void)tapGesture: (id)sender {
+    UIImagePickerController *imagePickerVC = [UIImagePickerController new];
+    imagePickerVC.delegate = self;
+    imagePickerVC.allowsEditing = YES;
+    imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    [self presentViewController:imagePickerVC animated:YES completion:nil];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+    // Get the image captured by the UIImagePickerController
+    UIImage *image = info[UIImagePickerControllerEditedImage];
+    [self.imgView setImage:image];
+    [PFUser.currentUser setObject:[self getPFFileFromImage:image] forKey:kUserProfileImage];
+    [PFUser.currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"Error uploading image: %@", error.localizedDescription);
+        } else {
+            NSLog(@"Successfully uploaded profile image");
+        }
+    }];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (PFFileObject *)getPFFileFromImage: (UIImage * _Nullable)image {
+    if (!image) {
+        return nil;
+    }
+    NSData *imageData = UIImagePNGRepresentation(image);
+    // get image data and check if that is not nil
+    if (!imageData) {
+        return nil;
+    }
+    return [PFFileObject fileObjectWithName:@"image.png" data:imageData];
+}
+
+- (void)setProfileImage {
+    if (PFUser.currentUser[kUserProfileImage]) {
+        self.imgView.file = PFUser.currentUser[kUserProfileImage];
+        [self.imgView loadInBackground];
+    }
+}
+
+- (void)queryTopArtists {
+    PFQuery *query = [Artist query];
+    [query whereKey:kArtistArtistID containedIn: [PFUser.currentUser objectForKey: kUserFavArtist]];
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"Error loading artists: %@", error.localizedDescription);
+        } else {
+            NSLog(@"Successfully retrieved artists");
+            self.arrayOfArtists = objects;
+            [self.tableView reloadData];
+        }
+    }];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+     return self.arrayOfArtists.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    ProfileTableCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kCellName
+                                                                 forIndexPath:indexPath];
+    Artist *artist = self.arrayOfArtists[indexPath.row];
+    [cell setArtist:artist];
+    return cell;
 }
 
 - (IBAction)didTapLogout:(id)sender {
@@ -27,20 +142,10 @@
         } else {
             NSLog(@"User logout successfully");
             SceneDelegate *myDelegate = (SceneDelegate *)self.view.window.windowScene.delegate;
-            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-            myDelegate.window.rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:kStoryboardName bundle:nil];
+            myDelegate.window.rootViewController = [storyboard instantiateViewControllerWithIdentifier:kLoginViewController];
         }
     }];
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
