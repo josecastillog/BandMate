@@ -92,6 +92,8 @@ static NSString* kSuiteName = @"bandmate.authState";
     return cell;
 }
 
+#pragma mark - Helper Functions
+
 - (void)setConnectSpotifyButton {
     self.spotifyButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.spotifyButton addTarget:self action:@selector(performOAuth) forControlEvents:UIControlEventTouchUpInside];
