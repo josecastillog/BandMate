@@ -12,6 +12,7 @@
 #import "Parse/Parse.h"
 #import "Match.h"
 #import "MatchTableViewCell.h"
+#import "MatchDetailsViewController.h"
 
 // Spotify OAuth 2.0 configuration
 static NSString *kClientID;
@@ -255,6 +256,15 @@ static NSString* kSuiteName = @"bandmate.authState";
         
     }];
     
+}
+
+#pragma mark - Navigation
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    MatchDetailsViewController *detailsController = [segue destinationViewController];
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+    Match *match = self.arrayOfMatches[indexPath.row];
+    detailsController.match = match;
 }
 
 @end
