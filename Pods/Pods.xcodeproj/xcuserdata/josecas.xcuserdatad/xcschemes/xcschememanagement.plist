@@ -6,6 +6,8 @@
 	<dict>
 		<key>AFNetworking.xcscheme</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>7</integer>
 		</dict>
@@ -32,6 +34,8 @@
 		</dict>
 		<key>Parse-ParseUI.xcscheme</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>8</integer>
 		</dict>
