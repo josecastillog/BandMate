@@ -11,10 +11,10 @@ static CGFloat const kCornerRadius = 19;
 
 @implementation ChatSendingTableViewCell
 
-- (void)setMessage:(NSString*)message {
+- (void)setMessage:(Message*)message {
     self.bubbleView.layer.cornerRadius = kCornerRadius;
     self.bubbleView.clipsToBounds = YES;
-    self.messageLabel.text = message;
+    self.messageLabel.text = message.content;
 }
 
 @end

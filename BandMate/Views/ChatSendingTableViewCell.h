@@ -6,6 +6,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Message.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -14,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *messageLabel;
 @property (weak, nonatomic) IBOutlet UIView *bubbleView;
 // Methods
-- (void)setMessage:(NSString*)message;
+- (void)setMessage:(Message*)message;
 @end
 
 NS_ASSUME_NONNULL_END
