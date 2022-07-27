@@ -164,36 +164,32 @@ static NSString *const kMatchExpertiseLevel = @"expertiseLevel";
                 match.numberOfMembers = [NSNumber numberWithInt:[match.numberOfMembers intValue] + 1];
                 [relation addObject:PFUser.currentUser];
                 return match;
-            } else {
-                return nil;
             }
+            return nil;
         case Drums:
             if (!match.hasDrummer) {
                 match.hasDrummer = YES;
                 match.numberOfMembers = [NSNumber numberWithInt:[match.numberOfMembers intValue] + 1];
                 [relation addObject:PFUser.currentUser];
                 return match;
-            } else {
-                return nil;
             }
+            return nil;
         case Singer:
             if (!match.hasSinger) {
                 match.hasSinger = YES;
                 match.numberOfMembers = [NSNumber numberWithInt:[match.numberOfMembers intValue] + 1];
                 [relation addObject:PFUser.currentUser];
                 return match;
-            } else {
-                return nil;
             }
+            return nil;
         case Bass:
             if (!match.hasBassist) {
                 match.hasBassist = YES;
                 match.numberOfMembers = [NSNumber numberWithInt:[match.numberOfMembers intValue] + 1];
                 [relation addObject:PFUser.currentUser];
                 return match;
-            } else {
-                return nil;
             }
+            return nil;
     }
     
 }
