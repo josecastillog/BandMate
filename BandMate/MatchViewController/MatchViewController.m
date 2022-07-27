@@ -11,65 +11,102 @@
 #import "AppAuth.h"
 #import "Parse/Parse.h"
 #import "Match.h"
+#import "MatchTableViewCell.h"
 
 // Spotify OAuth 2.0 configuration
 static NSString *kClientID;
 static NSString *const kIssuer = @"https://accounts.spotify.com/";
 static NSString *const kRedirectStringURI = @"app.bandmate:/callback";
 static NSString *const kAppAuthBandMateStateKey = @"authState";
-static NSString *const scope = @"user-top-read";
+static NSString *const kScope = @"user-top-read";
+// Spotify Api Request
+static NSString* url = @"https://api.spotify.com/v1/me/top/artists?time_range=long_term&limit=20";
+// Info.plist properties
+static NSString *const kPathForResource = @"Keys";
+static NSString *const kType = @"plist";
+static NSString *const kClientIdKey = @"client_ID_spotify";
+// Spotify button properties
+static double const kPositionX = 0;
+static double const kPositionY = 0;
+static double const kWidth = 200;
+static double const kHeight = 90;
+static double const kCornerRadius = 20;
+// Table view settings
+static NSString* kCellName = @"MatchCell";
+// User table keys
+static NSString* kUserMatchesRelation = @"Matches";
+static NSString* kFavoriteGenres = @"fav_genres";
+static NSString* kFavoriteArtists = @"fav_artists";
+// Match table keys
+static NSString* kMatchNumberOfMembers = @"numberOfMembers";
+// Query parameters
+static NSNumber* kMaxNumberOfMembers = @4;
+// NSUserDefaults
+static NSString* kSuiteName = @"bandmate.authState";
 
-@interface MatchViewController ()
-@property (weak, nonatomic) IBOutlet UIButton *connectButton;
-@property (weak, nonatomic) IBOutlet UIButton *disconnectButton;
-@property (weak, nonatomic) IBOutlet UIButton *apiCallButton;
+@interface MatchViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) NSArray *arrayOfArtists;
-@property(strong, nonatomic, nullable) OIDAuthState *authState;
+@property (strong, nonatomic) NSArray *arrayOfMatches;
+@property (strong, nonatomic) UIButton *spotifyButton;
+@property (strong, nonatomic) UIRefreshControl *refreshControl;
+@property (strong, nonatomic, nullable) OIDAuthState *authState;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @end
 
 @implementation MatchViewController
 
+#pragma mark - Initialize
+
 - (void)viewDidLoad {
-    
     [super viewDidLoad];
-
-    [self setup];
-
-}
-
-- (void)setup {
-    
-    NSString *path = [[NSBundle mainBundle] pathForResource: @"Keys" ofType: @"plist"];
+    NSString *path = [[NSBundle mainBundle] pathForResource:kPathForResource ofType:kType];
     NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile: path];
+    kClientID = [dict objectForKey:kClientIdKey];
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(queryUserMatches) forControlEvents:UIControlEventValueChanged];
+    [self.tableView insertSubview:self.refreshControl atIndex:0];
+    [self setMatchingScreen];
+}
 
-    kClientID = [dict objectForKey: @"client_ID_spotify"];
-    
+- (void)setMatchingScreen {
     [self loadState];
-    
-    if (self.authState) {
-        self.connectButton.enabled = NO;
+    if (_authState) {
+        [self queryUserMatches];
     } else {
-        self.disconnectButton.enabled = NO;
-        self.apiCallButton.enabled = NO;
+        [self setConnectSpotifyButton];
     }
-    
 }
 
-// Temporary buttons for testing
-- (IBAction)didTapConnect:(id)sender {
-    [self performOAuth];
+#pragma mark - TableView
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.arrayOfMatches.count;
 }
 
-- (IBAction)didTapDisconnect:(id)sender {
-    [self deleteState];
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    MatchTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kCellName forIndexPath:indexPath];
+    Match *match = self.arrayOfMatches[indexPath.row];
+    [cell setCell:match];
+    return cell;
 }
 
-- (IBAction)didTapApiCall:(id)sender {
-    [self getTopArtists];
-}
+#pragma mark - Network
 
-- (IBAction)didTapMatch:(id)sender {
-    [Match startMatching];
+- (void)queryUserMatches {
+    PFRelation *relation = [PFUser.currentUser relationForKey:kUserMatchesRelation];
+    PFQuery *query = [relation query];
+    [query whereKey:kMatchNumberOfMembers equalTo:kMaxNumberOfMembers];
+    [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"Error loading user's existing matches: %@", [error localizedDescription]);
+        } else {
+            self.arrayOfMatches = objects;
+            self.arrayOfMatches.count > 0 ? self.tableView.reloadData: [Match startMatching];
+            [self.refreshControl endRefreshing];
+        }
+    }];
 }
 
 // Performs Spotify OAuth 2.0
@@ -89,7 +126,7 @@ static NSString *const scope = @"user-top-read";
         OIDAuthorizationRequest *request =
         [[OIDAuthorizationRequest alloc] initWithConfiguration:configuration
                                                       clientId:kClientID
-                                                        scopes:@[scope]
+                                                        scopes:@[kScope]
                                                    redirectURL:kRedirectURI
                                                   responseType:OIDResponseTypeCode
                                           additionalParameters:nil];
@@ -101,9 +138,7 @@ static NSString *const scope = @"user-top-read";
                 NSLog(@"Got authorization tokes. Access tokes: %@", authState.lastTokenResponse.accessToken);
                 [self setAuthState:authState];
                 [self saveState];
-                self.connectButton.enabled = NO;
-                self.disconnectButton.enabled = YES;
-                self.apiCallButton.enabled = YES;
+                [self getTopArtists];
             } else {
                 NSLog(@"Authorization error: %@", [error localizedDescription]);
                 [self setAuthState:nil];
@@ -116,7 +151,7 @@ static NSString *const scope = @"user-top-read";
 
 // Stores OIDAuthState state in NSUserdefaults
 - (void)saveState {
-  NSUserDefaults* userDefaults = [[NSUserDefaults alloc] initWithSuiteName:@"bandmate.authState"];
+  NSUserDefaults* userDefaults = [[NSUserDefaults alloc] initWithSuiteName:kSuiteName];
   NSData *archivedAuthState = [NSKeyedArchiver archivedDataWithRootObject:_authState];
   [userDefaults setObject:archivedAuthState
                    forKey:kAppAuthBandMateStateKey];
@@ -125,7 +160,7 @@ static NSString *const scope = @"user-top-read";
 
 // Loads OIDAuthState from NSUSerDefaults
 - (void)loadState {
-  NSUserDefaults* userDefaults = [[NSUserDefaults alloc] initWithSuiteName:@"bandmate.authState"];
+  NSUserDefaults* userDefaults = [[NSUserDefaults alloc] initWithSuiteName:kSuiteName];
   NSData *archivedAuthState = [userDefaults objectForKey:kAppAuthBandMateStateKey];
   OIDAuthState *authState = [NSKeyedUnarchiver unarchiveObjectWithData:archivedAuthState];
   [self setAuthState:authState];
@@ -133,13 +168,10 @@ static NSString *const scope = @"user-top-read";
 
 // Deletes OIDAuthState when logout of Spotify
 -(void)deleteState {
-    NSUserDefaults* userDefaults = [[NSUserDefaults alloc] initWithSuiteName:@"bandmate.authState"];
+    NSUserDefaults* userDefaults = [[NSUserDefaults alloc] initWithSuiteName:kSuiteName];
     [userDefaults removeObjectForKey:kAppAuthBandMateStateKey];
     [userDefaults synchronize];
     [self setAuthState:nil];
-    self.connectButton.enabled = YES;
-    self.disconnectButton.enabled = NO;
-    self.apiCallButton.enabled = NO;
 }
 
 // API call always with fresh OAuth 2.0 tokens
@@ -155,7 +187,7 @@ static NSString *const scope = @"user-top-read";
             NSString *token = @"Bearer ";
             NSString *authHeader = [token stringByAppendingString:accessToken];
             
-            [request setURL:[NSURL URLWithString:@"https://api.spotify.com/v1/me/top/artists?time_range=long_term&limit=20"]];
+            [request setURL:[NSURL URLWithString:url]];
             [request setHTTPMethod:@"GET"];
             [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
             [request setValue:authHeader forHTTPHeaderField:@"Authorization"];
@@ -177,18 +209,21 @@ static NSString *const scope = @"user-top-read";
                 
                 // Saves artists to DB
                 [PFObject saveAllInBackground:self.arrayOfArtists block:^(BOOL succeeded, NSError * _Nullable error) {
-                    if (error) {
-                        NSLog(@"Error saving array of artists: %@", [error localizedDescription]);
-                    } else {
+                    if (!error || [error code] == 137) {
                         NSLog(@"Successfully saved array of artists");
+                        [Match startMatching];
+                        [self.spotifyButton removeFromSuperview];
+                        [self setMatchingScreen];
+                    } else {
+                        NSLog(@"Error saving array of artists: %@", error);
                     }
                 }];
                 
                 NSArray *arrayOfGenres = [Artist userGenresWithArray:self.arrayOfArtists];
                 NSArray *arrayOfArtistID = [Artist userArtistIDsWithArray:self.arrayOfArtists];
                 
-                [PFUser.currentUser setObject:arrayOfGenres forKey:@"fav_genres"];
-                [PFUser.currentUser setObject:arrayOfArtistID forKey:@"fav_artists"];
+                [PFUser.currentUser setObject:arrayOfGenres forKey:kFavoriteGenres];
+                [PFUser.currentUser setObject:arrayOfArtistID forKey:kFavoriteArtists];
                 
                 // Saves fav_genres and fav_artists to user in DB
                 [PFUser.currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
@@ -206,6 +241,22 @@ static NSString *const scope = @"user-top-read";
         
     }];
     
+}
+
+#pragma mark - Helper Functions
+
+- (void)setConnectSpotifyButton {
+    self.spotifyButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.spotifyButton addTarget:self action:@selector(performOAuth) forControlEvents:UIControlEventTouchUpInside];
+    [self.spotifyButton setTitle:@"Connect Spotify and start matching!" forState:UIControlStateNormal];
+    self.spotifyButton.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    self.spotifyButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+    self.spotifyButton.backgroundColor = [UIColor systemGreenColor];
+    self.spotifyButton.frame = CGRectMake(kPositionX, kPositionY, kWidth, kHeight);
+    self.spotifyButton.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
+    self.spotifyButton.layer.cornerRadius = kCornerRadius;
+    self.spotifyButton.clipsToBounds = YES;
+    [self.view addSubview:self.spotifyButton];
 }
 
 @end
