@@ -6,7 +6,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Match.h"
+#import "Conversation.h"
 @import Parse;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet PFImageView *bandImgView;
 @property (weak, nonatomic) IBOutlet UILabel *bandNameLabel;
 // Methods
-- (void)setCell:(Match*)match;
+- (void)setCell:(Conversation*)conversation;
 @end
 
 NS_ASSUME_NONNULL_END

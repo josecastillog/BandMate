@@ -7,15 +7,17 @@
 
 #import "YourBandsViewController.h"
 #import "BandsTableViewCell.h"
+#import "Conversation.h"
+#import "ChatViewController.h"
 
 // Table view
 static NSString *const kCellName = @"ChatCell";
 // User table keys
-static NSString *const kUserCurrentBands = @"currentBands";
+static NSString *const kUserConversations = @"conversations";
 
 @interface YourBandsViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) NSArray *arrayOfBands;
+@property (strong, nonatomic) NSArray *arrayOfConversations;
 @end
 
 @implementation YourBandsViewController
@@ -29,23 +31,30 @@ static NSString *const kUserCurrentBands = @"currentBands";
 }
 
 - (void)queryBands {
-    PFRelation *relation = [PFUser.currentUser relationForKey:kUserCurrentBands];
+    PFRelation *relation = [PFUser.currentUser relationForKey:kUserConversations];
     PFQuery *query = [relation query];
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
-        self.arrayOfBands = objects;
+        self.arrayOfConversations = objects;
         [self.tableView reloadData];
     }];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.arrayOfBands.count;
+    return self.arrayOfConversations.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     BandsTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kCellName forIndexPath:indexPath];
-    Match *match = self.arrayOfBands[indexPath.row];
-    [cell setCell:match];
+    Conversation *conversation = self.arrayOfConversations[indexPath.row];
+    [cell setCell:conversation];
     return cell;
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    ChatViewController *chatViewController = [segue destinationViewController];
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+    Conversation *conversation = self.arrayOfConversations[indexPath.row];
+    chatViewController.conversation = conversation;
 }
 
 @end
