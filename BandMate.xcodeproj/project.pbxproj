@@ -25,6 +25,8 @@
 		268C76A22887696D00D4E93B /* ProfileTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 268C76A12887696D00D4E93B /* ProfileTableCell.m */; };
 		26ADBDBA288E15AE00682B51 /* MatchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 26ADBDB9288E15AE00682B51 /* MatchTableViewCell.m */; };
 		26ADBDBD288E168600682B51 /* MatchCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 26ADBDBC288E168600682B51 /* MatchCollectionCell.m */; };
+		26ADBDC1288E383F00682B51 /* MatchDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26ADBDC0288E383F00682B51 /* MatchDetailsViewController.m */; };
+		26ADBDC4288E496400682B51 /* DetailsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 26ADBDC3288E496400682B51 /* DetailsTableViewCell.m */; };
 		26B782BD287CEB49004B0ADC /* MatchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26B782BC287CEB49004B0ADC /* MatchViewController.m */; };
 		26B782C1287DE607004B0ADC /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 26B782C0287DE607004B0ADC /* Keys.plist */; };
 		5C72A3C66FC5E586513329F1 /* Pods_BandMateTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7A9C3377856E079D48F0EA7 /* Pods_BandMateTests.framework */; };
@@ -84,6 +86,10 @@
 		26ADBDB9288E15AE00682B51 /* MatchTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MatchTableViewCell.m; sourceTree = "<group>"; };
 		26ADBDBB288E168600682B51 /* MatchCollectionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MatchCollectionCell.h; sourceTree = "<group>"; };
 		26ADBDBC288E168600682B51 /* MatchCollectionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MatchCollectionCell.m; sourceTree = "<group>"; };
+		26ADBDBF288E383F00682B51 /* MatchDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MatchDetailsViewController.h; sourceTree = "<group>"; };
+		26ADBDC0288E383F00682B51 /* MatchDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MatchDetailsViewController.m; sourceTree = "<group>"; };
+		26ADBDC2288E496400682B51 /* DetailsTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailsTableViewCell.h; sourceTree = "<group>"; };
+		26ADBDC3288E496400682B51 /* DetailsTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailsTableViewCell.m; sourceTree = "<group>"; };
 		26B782BB287CEB49004B0ADC /* MatchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MatchViewController.h; sourceTree = "<group>"; };
 		26B782BC287CEB49004B0ADC /* MatchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MatchViewController.m; sourceTree = "<group>"; };
 		26B782C0287DE607004B0ADC /* Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
@@ -190,6 +196,7 @@
 			children = (
 				268C769F2887692F00D4E93B /* Views */,
 				263CC3B7287F29BC002941BB /* DataModels */,
+				26ADBDBE288E380F00682B51 /* MatchDetailsViewController */,
 				26B782BA287CEB2B004B0ADC /* MatchViewController */,
 				263F2C902877562200A28601 /* ProfileViewController */,
 				263F2C892876558800A28601 /* RegisterViewController */,
@@ -236,8 +243,19 @@
 				26ADBDB9288E15AE00682B51 /* MatchTableViewCell.m */,
 				26ADBDBB288E168600682B51 /* MatchCollectionCell.h */,
 				26ADBDBC288E168600682B51 /* MatchCollectionCell.m */,
+				26ADBDC2288E496400682B51 /* DetailsTableViewCell.h */,
+				26ADBDC3288E496400682B51 /* DetailsTableViewCell.m */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		26ADBDBE288E380F00682B51 /* MatchDetailsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				26ADBDBF288E383F00682B51 /* MatchDetailsViewController.h */,
+				26ADBDC0288E383F00682B51 /* MatchDetailsViewController.m */,
+			);
+			path = MatchDetailsViewController;
 			sourceTree = "<group>";
 		};
 		26B782BA287CEB2B004B0ADC /* MatchViewController */ = {
@@ -516,12 +534,14 @@
 				26ADBDBD288E168600682B51 /* MatchCollectionCell.m in Sources */,
 				2652301C2884D927009FBAD2 /* Match.m in Sources */,
 				263F2C8F287655A800A28601 /* RegisterViewController.m in Sources */,
+				26ADBDC1288E383F00682B51 /* MatchDetailsViewController.m in Sources */,
 				268BF938286EACC900432CC8 /* AppDelegate.m in Sources */,
 				268BF949286EACC900432CC8 /* main.m in Sources */,
 				26B782BD287CEB49004B0ADC /* MatchViewController.m in Sources */,
 				263F2C932877564C00A28601 /* ProfileViewController.m in Sources */,
 				268BF93B286EACC900432CC8 /* SceneDelegate.m in Sources */,
 				263CC3BA287F29E0002941BB /* Artist.m in Sources */,
+				26ADBDC4288E496400682B51 /* DetailsTableViewCell.m in Sources */,
 				263F2C8C2876559D00A28601 /* LoginViewController.m in Sources */,
 				26ADBDBA288E15AE00682B51 /* MatchTableViewCell.m in Sources */,
 			);
