@@ -95,20 +95,6 @@ static NSString* kSuiteName = @"bandmate.authState";
     return cell;
 }
 
-- (void)setConnectSpotifyButton {
-    self.spotifyButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.spotifyButton addTarget:self action:@selector(performOAuth) forControlEvents:UIControlEventTouchUpInside];
-    [self.spotifyButton setTitle:@"Connect Spotify and start matching!" forState:UIControlStateNormal];
-    self.spotifyButton.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    self.spotifyButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-    self.spotifyButton.backgroundColor = [UIColor systemGreenColor];
-    self.spotifyButton.frame = CGRectMake(kPositionX, kPositionY, kWidth, kHeight);
-    self.spotifyButton.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
-    self.spotifyButton.layer.cornerRadius = kCornerRadius;
-    self.spotifyButton.clipsToBounds = YES;
-    [self.view addSubview:self.spotifyButton];
-}
-
 #pragma mark - Network
 
 - (void)queryUserMatches {
@@ -264,9 +250,25 @@ static NSString* kSuiteName = @"bandmate.authState";
     
 }
 
+#pragma mark - Helper Functions
+
 - (void)didTapAcceptDeclineButton:(Match *)match {
     [self.arrayOfMatches removeObject:match];
     [self.tableView reloadData];
+}
+
+- (void)setConnectSpotifyButton {
+    self.spotifyButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.spotifyButton addTarget:self action:@selector(performOAuth) forControlEvents:UIControlEventTouchUpInside];
+    [self.spotifyButton setTitle:@"Connect Spotify and start matching!" forState:UIControlStateNormal];
+    self.spotifyButton.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    self.spotifyButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+    self.spotifyButton.backgroundColor = [UIColor systemGreenColor];
+    self.spotifyButton.frame = CGRectMake(kPositionX, kPositionY, kWidth, kHeight);
+    self.spotifyButton.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
+    self.spotifyButton.layer.cornerRadius = kCornerRadius;
+    self.spotifyButton.clipsToBounds = YES;
+    [self.view addSubview:self.spotifyButton];
 }
 
 #pragma mark - Navigation
