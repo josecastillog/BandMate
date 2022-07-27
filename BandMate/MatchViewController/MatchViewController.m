@@ -38,6 +38,8 @@ static NSString* kCellName = @"MatchCell";
 static NSString* kUserMatchesRelation = @"Matches";
 static NSString* kFavoriteGenres = @"fav_genres";
 static NSString* kFavoriteArtists = @"fav_artists";
+static NSString* kObjectId = @"objectId";
+static NSString* kUserRelationCurrentBands = @"currentBands";
 // Match table keys
 static NSString* kMatchNumberOfMembers = @"numberOfMembers";
 // Query parameters
@@ -45,9 +47,9 @@ static NSNumber* kMaxNumberOfMembers = @4;
 // NSUserDefaults
 static NSString* kSuiteName = @"bandmate.authState";
 
-@interface MatchViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface MatchViewController () <UITableViewDelegate, UITableViewDataSource, MatchDetailsViewControllerDelegate>
 @property (strong, nonatomic) NSArray *arrayOfArtists;
-@property (strong, nonatomic) NSArray *arrayOfMatches;
+@property (strong, nonatomic) NSMutableArray *arrayOfMatches;
 @property (strong, nonatomic) UIButton *spotifyButton;
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
 @property (strong, nonatomic, nullable) OIDAuthState *authState;
@@ -96,14 +98,18 @@ static NSString* kSuiteName = @"bandmate.authState";
 #pragma mark - Network
 
 - (void)queryUserMatches {
+    PFRelation *relationBands = [PFUser.currentUser relationForKey:kUserRelationCurrentBands];
+    PFQuery *queryBands = [relationBands query];
     PFRelation *relation = [PFUser.currentUser relationForKey:kUserMatchesRelation];
     PFQuery *query = [relation query];
     [query whereKey:kMatchNumberOfMembers equalTo:kMaxNumberOfMembers];
+    [query whereKey:kObjectId doesNotMatchKey:kObjectId inQuery:queryBands];
+
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if (error) {
             NSLog(@"Error loading user's existing matches: %@", [error localizedDescription]);
         } else {
-            self.arrayOfMatches = objects;
+            self.arrayOfMatches = [NSMutableArray arrayWithArray:objects];
             self.arrayOfMatches.count > 0 ? self.tableView.reloadData: [Match startMatching];
             [self.refreshControl endRefreshing];
         }
@@ -246,6 +252,11 @@ static NSString* kSuiteName = @"bandmate.authState";
 
 #pragma mark - Helper Functions
 
+- (void)didTapAcceptDeclineButton:(Match *)match {
+    [self.arrayOfMatches removeObject:match];
+    [self.tableView reloadData];
+}
+
 - (void)setConnectSpotifyButton {
     self.spotifyButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.spotifyButton addTarget:self action:@selector(performOAuth) forControlEvents:UIControlEventTouchUpInside];
@@ -258,7 +269,6 @@ static NSString* kSuiteName = @"bandmate.authState";
     self.spotifyButton.layer.cornerRadius = kCornerRadius;
     self.spotifyButton.clipsToBounds = YES;
     [self.view addSubview:self.spotifyButton];
-
 }
 
 #pragma mark - Navigation
@@ -268,6 +278,7 @@ static NSString* kSuiteName = @"bandmate.authState";
     NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
     Match *match = self.arrayOfMatches[indexPath.row];
     detailsController.match = match;
+    detailsController.delegate = self;
 }
 
 @end

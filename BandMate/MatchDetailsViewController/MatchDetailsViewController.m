@@ -16,8 +16,11 @@ static NSString *const kUserProfileImage = @"profileImage";
 static NSString *const kObjectId = @"objectId";
 static NSString *const kUserInstrumentType = @"instrumentType";
 static NSString *const kUserUsername = @"username";
+static NSString *const kUserRelationBands = @"currentBands";
+static NSString *const kUserRelationMatch = @"Matches";
 // Match table keys
 static NSString *const kMatchMembersRelation = @"members";
+static NSString *const kMatchRelationAccepted = @"membersAccepted";
 // Artist table keys
 static NSString *const kArtistArtistId = @"artistID";
 // Buttons settings
@@ -119,11 +122,25 @@ static NSString *const kCellName = @"ProfileCell";
 }
 
 - (IBAction)didTapAccept:(id)sender {
-    
+    PFRelation *userRelation = [PFUser.currentUser relationForKey:kUserRelationBands];
+    [userRelation addObject:self.match];
+    [PFUser.currentUser saveInBackground];
+    PFRelation *matchRelation = [self.match relationForKey:kMatchRelationAccepted];
+    [matchRelation addObject:PFUser.currentUser];
+    [self.match saveInBackground];
+    [self.navigationController popViewControllerAnimated:YES];
+    [self.delegate didTapAcceptDeclineButton:self.match];
 }
 
 - (IBAction)didTapDecline:(id)sender {
-    
+    PFRelation *userRelation = [PFUser.currentUser relationForKey:kUserRelationMatch];
+    [userRelation removeObject:self.match];
+    [PFUser.currentUser saveInBackground];
+    PFRelation *matchRelation = [self.match relationForKey:kMatchMembersRelation];
+    [matchRelation removeObject:PFUser.currentUser];
+    [self.match saveInBackground];
+    [self.navigationController popViewControllerAnimated:YES];
+    [self.delegate didTapAcceptDeclineButton:self.match];
 }
 
 
