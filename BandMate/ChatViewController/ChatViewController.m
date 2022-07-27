@@ -8,9 +8,8 @@
 #import "ChatViewController.h"
 #import "ChatSendingTableViewCell.h"
 #import "ChatRecievingTableViewCell.h"
+#import "Message.h"
 
-// For testing UI, will delete in future commits
-static NSArray *const kArrayOfMessages = @[@"Hello", @"Hi!", @"How is it going?", @"going good hbu?", @"Good, thanks", @"Just working on the chat", @"Looking good so far just trying to get autolayout to work, apparently now it's working, let's see with this super long message", @"Looking good so far just trying to get autolayout to work, apparently know it's working, let's see with this super long message", @"For sure", @"Bye"];
 // Cell identifiers
 static NSString *const kSenderCell = @"sending";
 static NSString *const kRecieverCell = @"recieving";
@@ -23,15 +22,20 @@ static CGFloat const kBorderWidth = 0.1;
 // Keyboard animation
 static CGFloat const kDelay = 0;
 static CGFloat const kDuration = 0.6;
+// Message table keys
+static NSString *const kMessageConversation = @"conversation";
+static NSString *const kMessageSender = @"sender";
+static NSString *const kMessageCreatedAt = @"createdAt";
+// For send button
+static NSString *const kEmptyString = @"";
+static int const kIndexInsertion = 0;
 
 @interface ChatViewController () <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIButton *sendButton;
 @property (weak, nonatomic) IBOutlet UITextField *messageTxtField;
-@property (strong, nonatomic) NSArray *arrayOfMessages;
+@property (strong, nonatomic) NSMutableArray *arrayOfMessages;
 @property CGFloat originalHeight;
-// BOOL property for testing UI, will delete in future commits
-@property BOOL swap;
 @end
 
 @implementation ChatViewController
@@ -73,10 +77,26 @@ static CGFloat const kDuration = 0.6;
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     // For returning view after keyboard dismiss
     self.originalHeight = self.view.frame.size.height;
-    // Temporary for testing
-    self.arrayOfMessages = kArrayOfMessages.reverseObjectEnumerator.allObjects;
-    self.swap = YES;
+    // Load conversation
+    [self queryMessages];
     
+}
+
+#pragma mark - Queries
+
+- (void)queryMessages {
+    PFQuery *query = [Message query];
+    [query whereKey:kMessageConversation equalTo:self.conversation];
+    [query includeKey:kMessageSender];
+    [query orderByDescending:kMessageCreatedAt];
+    [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"Error loading messages: %@", [error localizedDescription]);
+        } else {
+            self.arrayOfMessages = [NSMutableArray arrayWithArray:objects];
+            [self.tableView reloadData];
+        }
+    }];
 }
 
 #pragma mark - Table View
@@ -86,17 +106,16 @@ static CGFloat const kDuration = 0.6;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (self.swap) {
+    Message *message = self.arrayOfMessages[indexPath.row];
+    if ([message.sender.username isEqualToString:PFUser.currentUser.username]) {
         ChatSendingTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kSenderCell forIndexPath:indexPath];
         cell.contentView.transform = CGAffineTransformMakeScale(kXfactor, kYfactor);
-        [cell setMessage:self.arrayOfMessages[indexPath.row]];
-        self.swap = NO;
+        [cell setMessage:message];
         return cell;
     } else {
         ChatRecievingTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kRecieverCell forIndexPath:indexPath];
         cell.contentView.transform = CGAffineTransformMakeScale(kXfactor, kYfactor);
-        [cell setMessage:self.arrayOfMessages[indexPath.row]];
-        self.swap = YES;
+        [cell setMessage:message];
         return cell;
     }
 }
@@ -131,6 +150,16 @@ static CGFloat const kDuration = 0.6;
         self.view.frame = frame;
         [self.view layoutIfNeeded];
     } completion:nil];
+}
+
+#pragma mark - Actions
+
+- (IBAction)didTapSend:(id)sender {
+    Message *message = [Message initWithContent:self.conversation :self.messageTxtField.text];
+    [message saveInBackground];
+    [self.arrayOfMessages insertObject:message atIndex:kIndexInsertion];
+    self.messageTxtField.text = kEmptyString;
+    [self.tableView reloadData];
 }
 
 @end
