@@ -18,8 +18,8 @@ static NSString *const kRecieverCell = @"recieving";
 static CGFloat const kXfactor = 1;
 static CGFloat const kYfactor = -1;
 // Styling settings
-static CGFloat const kCornerRadius = 15;
-static CGFloat const kBorderWidth = 0.1;
+static CGFloat const kCornerRadius = 10;
+static CGFloat const kBorderWidth = 1.5;
 // Keyboard animation
 static CGFloat const kDelay = 0;
 static CGFloat const kDuration = 0.6;
@@ -68,11 +68,12 @@ static int const kIndexInsertion = 0;
     // Styling text field
     self.messageTxtField.delegate = self;
     self.messageTxtField.clipsToBounds = YES;
-    self.messageTxtField.layer.cornerRadius = kCornerRadius;
+    self.messageTxtField.layer.cornerRadius = self.messageTxtField.frame.size.height/2;
     self.messageTxtField.layer.borderWidth = kBorderWidth;
+    self.messageTxtField.layer.borderColor = [UIColor lightGrayColor].CGColor;
     // Styling send button
     self.sendButton.clipsToBounds = YES;
-    self.sendButton.layer.cornerRadius = kCornerRadius;
+    self.sendButton.layer.cornerRadius = self.sendButton.frame.size.height/2;
     // Table view
     self.tableView.delegate = self;
     self.tableView.dataSource = self;

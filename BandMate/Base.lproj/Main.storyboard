@@ -475,7 +475,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="WBp-eu-wo0">
-                                <rect key="frame" x="0.0" y="88" width="390" height="614"/>
+                                <rect key="frame" x="0.0" y="88" width="390" height="620"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="recieving" rowHeight="80" id="pfp-An-WmK" customClass="ChatRecievingTableViewCell">
@@ -547,7 +547,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
-                                                    <color key="backgroundColor" red="0.1677034003" green="0.84948736489999999" blue="0.2415352546" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <color key="backgroundColor" red="0.66128221363070616" green="0.93789093181919192" blue="0.63226263124584359" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <constraints>
                                                         <constraint firstAttribute="trailing" secondItem="ech-2t-1M6" secondAttribute="trailing" constant="16" id="NZV-Ld-jKM"/>
                                                         <constraint firstItem="ech-2t-1M6" firstAttribute="leading" secondItem="lcq-Lk-SfA" secondAttribute="leading" constant="16" id="OPE-3C-7NC"/>
@@ -571,39 +571,42 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KUa-Gc-4wP">
+                                <rect key="frame" x="8" y="713" width="328" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5cJ-19-F6b">
-                                <rect key="frame" x="298" y="712" width="87" height="31"/>
+                                <rect key="frame" x="344" y="713" width="34" height="34"/>
                                 <color key="backgroundColor" systemColor="linkColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34" id="Eas-aD-vIt"/>
+                                    <constraint firstAttribute="width" constant="34" id="u3A-YF-ZOW"/>
+                                </constraints>
+                                <inset key="contentEdgeInsets" minX="20" minY="20" maxX="20" maxY="20"/>
+                                <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Send">
+                                <buttonConfiguration key="configuration" style="plain" image="paperplane.fill" catalog="system">
                                     <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="didTapSend:" destination="F3N-U4-LM7" eventType="touchUpInside" id="8LG-WT-uI4"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KUa-Gc-4wP">
-                                <rect key="frame" x="8" y="710" width="282" height="34"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="282" id="VAo-Gb-qeV"/>
-                                    <constraint firstAttribute="height" constant="34" id="o1Q-kV-yFv"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="dt0-dZ-zIQ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="5cJ-19-F6b" firstAttribute="leading" secondItem="KUa-Gc-4wP" secondAttribute="trailing" constant="8" id="1RB-cL-a60"/>
-                            <constraint firstItem="dt0-dZ-zIQ" firstAttribute="trailing" secondItem="5cJ-19-F6b" secondAttribute="trailing" constant="5" id="3c8-Vf-lQs"/>
-                            <constraint firstItem="KUa-Gc-4wP" firstAttribute="top" secondItem="WBp-eu-wo0" secondAttribute="bottom" constant="8" symbolic="YES" id="4sW-zN-WpF"/>
+                            <constraint firstItem="KUa-Gc-4wP" firstAttribute="top" secondItem="WBp-eu-wo0" secondAttribute="bottom" constant="5" id="4sW-zN-WpF"/>
+                            <constraint firstItem="5cJ-19-F6b" firstAttribute="top" secondItem="WBp-eu-wo0" secondAttribute="bottom" constant="5" id="5no-Qx-qHQ"/>
+                            <constraint firstItem="5cJ-19-F6b" firstAttribute="leading" secondItem="KUa-Gc-4wP" secondAttribute="trailing" constant="8" symbolic="YES" id="6mv-nv-UvK"/>
+                            <constraint firstItem="dt0-dZ-zIQ" firstAttribute="bottom" secondItem="5cJ-19-F6b" secondAttribute="bottom" constant="14" id="FTp-7p-4gQ"/>
                             <constraint firstItem="WBp-eu-wo0" firstAttribute="top" secondItem="dt0-dZ-zIQ" secondAttribute="top" id="Ida-Hj-whM"/>
-                            <constraint firstItem="dt0-dZ-zIQ" firstAttribute="bottom" secondItem="KUa-Gc-4wP" secondAttribute="bottom" constant="17" id="OVe-WU-fKb"/>
+                            <constraint firstItem="dt0-dZ-zIQ" firstAttribute="bottom" secondItem="KUa-Gc-4wP" secondAttribute="bottom" constant="14" id="OVe-WU-fKb"/>
                             <constraint firstItem="KUa-Gc-4wP" firstAttribute="leading" secondItem="dt0-dZ-zIQ" secondAttribute="leading" constant="8" id="QDq-iE-13n"/>
                             <constraint firstItem="WBp-eu-wo0" firstAttribute="trailing" secondItem="dt0-dZ-zIQ" secondAttribute="trailing" id="alY-GM-O1Y"/>
+                            <constraint firstItem="dt0-dZ-zIQ" firstAttribute="trailing" secondItem="5cJ-19-F6b" secondAttribute="trailing" constant="12" id="iKF-ek-tsZ"/>
                             <constraint firstItem="WBp-eu-wo0" firstAttribute="leading" secondItem="dt0-dZ-zIQ" secondAttribute="leading" id="mXd-Wy-pbj"/>
-                            <constraint firstItem="dt0-dZ-zIQ" firstAttribute="bottom" secondItem="5cJ-19-F6b" secondAttribute="bottom" constant="18" id="x8O-0V-gUE"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="cKy-Nw-7oD"/>
@@ -968,6 +971,7 @@
         <image name="guitars" catalog="system" width="128" height="100"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="music.mic" catalog="system" width="128" height="121"/>
+        <image name="paperplane.fill" catalog="system" width="128" height="118"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>
         <image name="phone.fill" catalog="system" width="128" height="114"/>
         <systemColor name="linkColor">
