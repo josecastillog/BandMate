@@ -9,6 +9,7 @@
 #import "ChatSendingTableViewCell.h"
 #import "ChatRecievingTableViewCell.h"
 #import "Message.h"
+@import ParseLiveQuery;
 
 // Cell identifiers
 static NSString *const kSenderCell = @"sending";
@@ -35,6 +36,9 @@ static int const kIndexInsertion = 0;
 @property (weak, nonatomic) IBOutlet UIButton *sendButton;
 @property (weak, nonatomic) IBOutlet UITextField *messageTxtField;
 @property (strong, nonatomic) NSMutableArray *arrayOfMessages;
+@property (strong, nonatomic) PFLiveQueryClient *client;
+@property (strong, nonatomic) PFQuery *query;
+@property (strong, nonatomic) PFLiveQuerySubscription *subscription;
 @property CGFloat originalHeight;
 @end
 
@@ -79,6 +83,8 @@ static int const kIndexInsertion = 0;
     self.originalHeight = self.view.frame.size.height;
     // Load conversation
     [self queryMessages];
+    // Live Query setup
+    [self liveQuerySetup];
     
 }
 
@@ -95,6 +101,21 @@ static int const kIndexInsertion = 0;
         } else {
             self.arrayOfMessages = [NSMutableArray arrayWithArray:objects];
             [self.tableView reloadData];
+        }
+    }];
+}
+
+- (void)liveQuerySetup {
+    self.client = [[PFLiveQueryClient alloc] init];
+    self.query = [Message query];
+    [self.query whereKey:kMessageConversation equalTo:self.conversation];
+    self.subscription = [[self.client subscribeToQuery:self.query] addCreateHandler:^(PFQuery * query, PFObject *object) {
+        Message *message = [Message initWithPFObject:object];
+        if (![message.sender.objectId isEqual:PFUser.currentUser.objectId]) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.arrayOfMessages insertObject:message atIndex:kIndexInsertion];
+                [self.tableView reloadData];
+            });
         }
     }];
 }
