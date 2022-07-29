@@ -8,6 +8,7 @@
 #import "ChatViewController.h"
 #import "ChatSendingTableViewCell.h"
 #import "ChatRecievingTableViewCell.h"
+#import "MessageDetailsViewController.h"
 #import "Message.h"
 @import ParseLiveQuery;
 
@@ -32,6 +33,8 @@ static NSString *const kEmptyString = @"";
 static int const kIndexInsertion = 0;
 // Query settings
 static int const kQueryLimit = 20;
+// Segue identifier
+static NSString *const kMessageDetailsSegue = @"messageDetails";
 
 @interface ChatViewController () <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -154,15 +157,19 @@ static int const kQueryLimit = 20;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UISwipeGestureRecognizer *swipeGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(didSwipe:)];
+    swipeGesture.direction = UISwipeGestureRecognizerDirectionLeft;
     Message *message = self.arrayOfMessages[indexPath.row];
     if ([message.sender.username isEqualToString:PFUser.currentUser.username]) {
         ChatSendingTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kSenderCell forIndexPath:indexPath];
         cell.contentView.transform = CGAffineTransformMakeScale(kXfactor, kYfactor);
+        [cell.bubbleView addGestureRecognizer:swipeGesture];
         [cell setMessage:message];
         return cell;
     } else {
         ChatRecievingTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kRecieverCell forIndexPath:indexPath];
         cell.contentView.transform = CGAffineTransformMakeScale(kXfactor, kYfactor);
+        [cell.bubbleView addGestureRecognizer:swipeGesture];
         [cell setMessage:message];
         return cell;
     }
@@ -219,6 +226,22 @@ static int const kQueryLimit = 20;
     [self.arrayOfMessages insertObject:message atIndex:kIndexInsertion];
     self.messageTxtField.text = kEmptyString;
     [self.tableView reloadData];
+}
+
+#pragma mark - Helper Functions
+
+- (void)didSwipe:(UISwipeGestureRecognizer*)swipe{
+    [self performSegueWithIdentifier:kMessageDetailsSegue sender:swipe];
+}
+
+#pragma mark - Navigation
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    MessageDetailsViewController *detailsController = [segue destinationViewController];
+    CGPoint location = [sender locationInView:self.tableView];
+    NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:location];
+    Message *message = self.arrayOfMessages[indexPath.row];
+    detailsController.message = message;
 }
 
 @end
