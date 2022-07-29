@@ -11,6 +11,7 @@ target 'BandMate' do
   pod 'Parse/UI'
   pod 'AFNetworking'
   pod 'ParseLiveQuery'
+  pod 'Shimmer'
 
   target 'BandMateTests' do
     inherit! :search_paths
