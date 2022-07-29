@@ -32,6 +32,7 @@
 		26ADBDCC288F5AD900682B51 /* YourBandsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26ADBDCB288F5AD900682B51 /* YourBandsViewController.m */; };
 		26ADBDCF288F63AE00682B51 /* BandsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 26ADBDCE288F63AE00682B51 /* BandsTableViewCell.m */; };
 		26ADBDD32890690E00682B51 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26ADBDD22890690E00682B51 /* ChatViewController.m */; };
+		26B5688F289468CE0003F89B /* MessageDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26B5688E289468CE0003F89B /* MessageDetailsViewController.m */; };
 		26B782BD287CEB49004B0ADC /* MatchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26B782BC287CEB49004B0ADC /* MatchViewController.m */; };
 		26B782C1287DE607004B0ADC /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 26B782C0287DE607004B0ADC /* Keys.plist */; };
 		26F8D08128906AFD00A62218 /* ChatSendingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 26F8D08028906AFD00A62218 /* ChatSendingTableViewCell.m */; };
@@ -107,6 +108,8 @@
 		26ADBDCE288F63AE00682B51 /* BandsTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BandsTableViewCell.m; sourceTree = "<group>"; };
 		26ADBDD12890690E00682B51 /* ChatViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
 		26ADBDD22890690E00682B51 /* ChatViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
+		26B5688D289468CE0003F89B /* MessageDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageDetailsViewController.h; sourceTree = "<group>"; };
+		26B5688E289468CE0003F89B /* MessageDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageDetailsViewController.m; sourceTree = "<group>"; };
 		26B782BB287CEB49004B0ADC /* MatchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MatchViewController.h; sourceTree = "<group>"; };
 		26B782BC287CEB49004B0ADC /* MatchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MatchViewController.m; sourceTree = "<group>"; };
 		26B782C0287DE607004B0ADC /* Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
@@ -219,6 +222,7 @@
 		268BF935286EACC900432CC8 /* BandMate */ = {
 			isa = PBXGroup;
 			children = (
+				26B5688C289468A70003F89B /* MessageDetailsViewController */,
 				263CC3B7287F29BC002941BB /* DataModels */,
 				268C769F2887692F00D4E93B /* Views */,
 				26ADBDD0289068F000682B51 /* ChatViewController */,
@@ -307,6 +311,15 @@
 				26ADBDD22890690E00682B51 /* ChatViewController.m */,
 			);
 			path = ChatViewController;
+			sourceTree = "<group>";
+		};
+		26B5688C289468A70003F89B /* MessageDetailsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				26B5688D289468CE0003F89B /* MessageDetailsViewController.h */,
+				26B5688E289468CE0003F89B /* MessageDetailsViewController.m */,
+			);
+			path = MessageDetailsViewController;
 			sourceTree = "<group>";
 		};
 		26B782BA287CEB2B004B0ADC /* MatchViewController */ = {
@@ -584,6 +597,7 @@
 				268BF93E286EACC900432CC8 /* ViewController.m in Sources */,
 				26ADBDBD288E168600682B51 /* MatchCollectionCell.m in Sources */,
 				2652301C2884D927009FBAD2 /* Match.m in Sources */,
+				26B5688F289468CE0003F89B /* MessageDetailsViewController.m in Sources */,
 				263F2C8F287655A800A28601 /* RegisterViewController.m in Sources */,
 				26ADBDCF288F63AE00682B51 /* BandsTableViewCell.m in Sources */,
 				26A8DCB32891BBED009F7D38 /* Conversation.m in Sources */,
