@@ -421,21 +421,33 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NM3-lK-H5f">
                                                     <rect key="frame" x="0.0" y="0.0" width="390" height="128"/>
                                                     <subviews>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default-profile-icon-16" translatesAutoresizingMaskIntoConstraints="NO" id="Y33-TZ-t9c" customClass="PFImageView">
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default-profile-icon-16" translatesAutoresizingMaskIntoConstraints="NO" id="Y33-TZ-t9c" customClass="PFImageView">
                                                             <rect key="frame" x="22" y="22" width="83" height="83"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="83" id="Gp3-Uk-hJn"/>
                                                                 <constraint firstAttribute="height" constant="83" id="e2o-nN-Tyy"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K2b-wl-PfO">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your band with artist:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K2b-wl-PfO">
                                                             <rect key="frame" x="121" y="29" width="249" height="27"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IZI-LJ-NaI">
+                                                            <rect key="frame" x="121" y="60.000000000000007" width="219" height="20.333333333333336"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="219" id="CYW-es-xdw"/>
+                                                                <constraint firstAttribute="height" constant="20.329999999999998" id="tHf-AI-gTa"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
                                                     </subviews>
                                                     <constraints>
+                                                        <constraint firstItem="IZI-LJ-NaI" firstAttribute="top" secondItem="K2b-wl-PfO" secondAttribute="bottom" constant="4" id="Cf0-fU-1YT"/>
+                                                        <constraint firstItem="IZI-LJ-NaI" firstAttribute="leading" secondItem="Y33-TZ-t9c" secondAttribute="trailing" constant="16" id="CrD-q6-ap8"/>
                                                         <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Y33-TZ-t9c" secondAttribute="bottom" constant="23" id="R2z-eV-m3m"/>
                                                         <constraint firstAttribute="bottom" secondItem="K2b-wl-PfO" secondAttribute="bottom" constant="72" id="UR2-4Y-6oS"/>
                                                         <constraint firstItem="K2b-wl-PfO" firstAttribute="leading" secondItem="Y33-TZ-t9c" secondAttribute="trailing" constant="16" id="bLJ-Ig-OVe"/>
@@ -459,9 +471,10 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="bandImgView" destination="Y33-TZ-t9c" id="lji-K8-VLg"/>
-                                            <outlet property="bandNameLabel" destination="K2b-wl-PfO" id="MEa-dl-Ab1"/>
+                                            <outlet property="bandNameLabel" destination="IZI-LJ-NaI" id="P5N-4Z-7Zk"/>
                                             <outlet property="mainView" destination="NM3-lK-H5f" id="wW1-eN-9el"/>
                                             <outlet property="shimView" destination="2zu-MM-oGu" id="qwC-R5-1Sb"/>
+                                            <outlet property="upperLabel" destination="K2b-wl-PfO" id="O8o-7T-tCN"/>
                                             <segue destination="F3N-U4-LM7" kind="show" id="moF-bW-6k8"/>
                                         </connections>
                                     </tableViewCell>
