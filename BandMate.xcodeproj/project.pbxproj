@@ -222,9 +222,9 @@
 		268BF935286EACC900432CC8 /* BandMate */ = {
 			isa = PBXGroup;
 			children = (
-				26B5688C289468A70003F89B /* MessageDetailsViewController */,
 				263CC3B7287F29BC002941BB /* DataModels */,
 				268C769F2887692F00D4E93B /* Views */,
+				26B5688C289468A70003F89B /* MessageDetailsViewController */,
 				26ADBDD0289068F000682B51 /* ChatViewController */,
 				26ADBDBE288E380F00682B51 /* MatchDetailsViewController */,
 				26B782BA287CEB2B004B0ADC /* MatchViewController */,
