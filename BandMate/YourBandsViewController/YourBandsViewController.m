@@ -23,6 +23,8 @@ static CGFloat const kEndingAlpha = 1;
 static CGFloat const kDuration = 0.5;
 // Refresh Control index
 static int const kIndex = 0;
+// Conversation table keys
+static NSString *const kConversationMatch = @"match";
 
 @interface YourBandsViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -50,6 +52,7 @@ static int const kIndex = 0;
     [self.refreshControl endRefreshing];
     PFRelation *relation = [PFUser.currentUser relationForKey:kUserConversations];
     PFQuery *query = [relation query];
+    [query includeKey:kConversationMatch];
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         self.arrayOfConversations = objects;
         self.isLoaded = YES;

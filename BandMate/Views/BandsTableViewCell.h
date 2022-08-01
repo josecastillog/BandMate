@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 // Properties
 @property (weak, nonatomic) IBOutlet PFImageView *bandImgView;
 @property (weak, nonatomic) IBOutlet UILabel *bandNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *upperLabel;
 @property (weak, nonatomic) IBOutlet FBShimmeringView *shimView;
 @property (weak, nonatomic) IBOutlet UIView *mainView;
 // Methods
