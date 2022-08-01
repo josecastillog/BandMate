@@ -21,7 +21,7 @@ static NSString *const kUserFavArtist = @"fav_artists";
 // Artist table keys
 static NSString *const kArtistArtistID = @"artistID";
 // Table view
-static NSString *const kCellName = @"kArtistArtistID";
+static NSString *const kCellName = @"ProfileCell";
 // Storyboard
 static NSString *const kStoryboardName = @"main";
 // LoginViewController identifier
