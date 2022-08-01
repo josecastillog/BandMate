@@ -8,6 +8,8 @@
 #import "Message.h"
 
 static NSString *const kClassName = @"Message";
+static NSString *const kMessageSender = @"sender";
+static NSString *const kMessageContent = @"content";
 
 @implementation Message
 
@@ -25,6 +27,15 @@ static NSString *const kClassName = @"Message";
     message.content = content;
     message.sender = PFUser.currentUser;
     message.conversation = conversation;
+    return message;
+}
+
++ (Message*)initWithPFObject:(PFObject*)object {
+    Message *message = [[Message alloc] init];
+    PFUser *user = [object objectForKey:kMessageSender];
+    message.sender = user;
+    message.content = [object objectForKey:kMessageContent];
+    [user fetchIfNeeded];
     return message;
 }
 

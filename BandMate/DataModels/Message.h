@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *content;
 // Methods
 + (Message*)initWithContent:(Conversation*)conversation :(NSString*)content;
++ (Message*)initWithPFObject:(PFObject*)object;
 
 @end
 

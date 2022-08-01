@@ -24,7 +24,7 @@
         
         configuration.applicationId = [dict objectForKey: @"application_ID_parse"];
         configuration.clientKey = [dict objectForKey: @"client_key_parse"];
-        configuration.server = @"https://parseapi.back4app.com";
+        configuration.server = @"https://bandmatemetau.b4a.io";
         
     }];
 
