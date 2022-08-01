@@ -23,6 +23,8 @@
 		268BF95D286EACCA00432CC8 /* BandMateUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 268BF95C286EACCA00432CC8 /* BandMateUITests.m */; };
 		268BF95F286EACCA00432CC8 /* BandMateUITestsLaunchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 268BF95E286EACCA00432CC8 /* BandMateUITestsLaunchTests.m */; };
 		268C76A22887696D00D4E93B /* ProfileTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 268C76A12887696D00D4E93B /* ProfileTableCell.m */; };
+		26A8DCB32891BBED009F7D38 /* Conversation.m in Sources */ = {isa = PBXBuildFile; fileRef = 26A8DCB22891BBED009F7D38 /* Conversation.m */; };
+		26A8DCB62891BD9F009F7D38 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 26A8DCB52891BD9F009F7D38 /* Message.m */; };
 		26ADBDBA288E15AE00682B51 /* MatchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 26ADBDB9288E15AE00682B51 /* MatchTableViewCell.m */; };
 		26ADBDBD288E168600682B51 /* MatchCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 26ADBDBC288E168600682B51 /* MatchCollectionCell.m */; };
 		26ADBDC1288E383F00682B51 /* MatchDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26ADBDC0288E383F00682B51 /* MatchDetailsViewController.m */; };
@@ -87,6 +89,10 @@
 		268BF95E286EACCA00432CC8 /* BandMateUITestsLaunchTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BandMateUITestsLaunchTests.m; sourceTree = "<group>"; };
 		268C76A02887696D00D4E93B /* ProfileTableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileTableCell.h; sourceTree = "<group>"; };
 		268C76A12887696D00D4E93B /* ProfileTableCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileTableCell.m; sourceTree = "<group>"; };
+		26A8DCB12891BBED009F7D38 /* Conversation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Conversation.h; sourceTree = "<group>"; };
+		26A8DCB22891BBED009F7D38 /* Conversation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Conversation.m; sourceTree = "<group>"; };
+		26A8DCB42891BD9F009F7D38 /* Message.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
+		26A8DCB52891BD9F009F7D38 /* Message.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
 		26ADBDB8288E15AE00682B51 /* MatchTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MatchTableViewCell.h; sourceTree = "<group>"; };
 		26ADBDB9288E15AE00682B51 /* MatchTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MatchTableViewCell.m; sourceTree = "<group>"; };
 		26ADBDBB288E168600682B51 /* MatchCollectionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MatchCollectionCell.h; sourceTree = "<group>"; };
@@ -153,6 +159,10 @@
 				263CC3B9287F29E0002941BB /* Artist.m */,
 				2652301A2884D927009FBAD2 /* Match.h */,
 				2652301B2884D927009FBAD2 /* Match.m */,
+				26A8DCB12891BBED009F7D38 /* Conversation.h */,
+				26A8DCB22891BBED009F7D38 /* Conversation.m */,
+				26A8DCB42891BD9F009F7D38 /* Message.h */,
+				26A8DCB52891BD9F009F7D38 /* Message.m */,
 			);
 			path = DataModels;
 			sourceTree = "<group>";
@@ -209,9 +219,9 @@
 		268BF935286EACC900432CC8 /* BandMate */ = {
 			isa = PBXGroup;
 			children = (
-				26ADBDD0289068F000682B51 /* ChatViewController */,
-				268C769F2887692F00D4E93B /* Views */,
 				263CC3B7287F29BC002941BB /* DataModels */,
+				268C769F2887692F00D4E93B /* Views */,
+				26ADBDD0289068F000682B51 /* ChatViewController */,
 				26ADBDBE288E380F00682B51 /* MatchDetailsViewController */,
 				26B782BA287CEB2B004B0ADC /* MatchViewController */,
 				26ADBDC9288F5A9000682B51 /* YourBandsViewController */,
@@ -576,8 +586,10 @@
 				2652301C2884D927009FBAD2 /* Match.m in Sources */,
 				263F2C8F287655A800A28601 /* RegisterViewController.m in Sources */,
 				26ADBDCF288F63AE00682B51 /* BandsTableViewCell.m in Sources */,
+				26A8DCB32891BBED009F7D38 /* Conversation.m in Sources */,
 				26F8D08C2890AE7500A62218 /* ChatRecievingTableViewCell.m in Sources */,
 				26ADBDC1288E383F00682B51 /* MatchDetailsViewController.m in Sources */,
+				26A8DCB62891BD9F009F7D38 /* Message.m in Sources */,
 				268BF938286EACC900432CC8 /* AppDelegate.m in Sources */,
 				26ADBDD32890690E00682B51 /* ChatViewController.m in Sources */,
 				268BF949286EACC900432CC8 /* main.m in Sources */,
