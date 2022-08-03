@@ -17,6 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) PFUser *sender;
 @property (nonatomic, strong) Conversation *conversation;
 @property (nonatomic, strong) NSString *content;
+@property (nonatomic, strong) NSNumber *likeCount;
+@property (nonatomic, strong) NSArray *usersThatLiked;
 // Methods
 + (Message*)initWithContent:(Conversation*)conversation :(NSString*)content;
 + (Message*)initWithPFObject:(PFObject*)object;

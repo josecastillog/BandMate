@@ -19,12 +19,12 @@ static NSString *const kRecieverCell = @"recieving";
 static CGFloat const kXfactor = 1;
 static CGFloat const kYfactor = -1;
 // Styling settings
-static CGFloat const kCornerRadius = 10;
 static CGFloat const kBorderWidth = 1.5;
 // Keyboard animation
 static CGFloat const kDelay = 0;
 static CGFloat const kDuration = 0.6;
 // Message table keys
+static NSString *const kObjectId = @"objectId";
 static NSString *const kMessageConversation = @"conversation";
 static NSString *const kMessageSender = @"sender";
 static NSString *const kMessageCreatedAt = @"createdAt";
@@ -42,8 +42,10 @@ static NSString *const kMessageDetailsSegue = @"messageDetails";
 @property (weak, nonatomic) IBOutlet UITextField *messageTxtField;
 @property (strong, nonatomic) NSMutableArray *arrayOfMessages;
 @property (strong, nonatomic) PFLiveQueryClient *client;
-@property (strong, nonatomic) PFQuery *query;
-@property (strong, nonatomic) PFLiveQuerySubscription *subscription;
+@property (strong, nonatomic) PFLiveQuerySubscription *subscriptionMessages;
+@property (strong, nonatomic) PFLiveQuerySubscription *subscriptionLikes;
+@property (strong, nonatomic) PFQuery *queryLiveMessages;
+@property (strong, nonatomic) PFQuery *queryLiveLikes;
 @property (strong, nonatomic) Message *lastMessage;
 @property BOOL isMoreDataLoading;
 @property CGFloat originalHeight;
@@ -93,7 +95,9 @@ static NSString *const kMessageDetailsSegue = @"messageDetails";
     // Load conversation
     [self queryMessages];
     // Live Query setup
-    [self liveQuerySetup];
+    self.client = [[PFLiveQueryClient alloc] init];
+    [self liveQueryMessages];
+    [self liveQueryLikes];
     
 }
 
@@ -135,11 +139,10 @@ static NSString *const kMessageDetailsSegue = @"messageDetails";
     }];
 }
 
-- (void)liveQuerySetup {
-    self.client = [[PFLiveQueryClient alloc] init];
-    self.query = [Message query];
-    [self.query whereKey:kMessageConversation equalTo:self.conversation];
-    self.subscription = [[self.client subscribeToQuery:self.query] addCreateHandler:^(PFQuery * query, PFObject *object) {
+- (void)liveQueryMessages {
+    self.queryLiveMessages = [Message query];
+    [self.queryLiveMessages whereKey:kMessageConversation equalTo:self.conversation];
+    self.subscriptionMessages = [[self.client subscribeToQuery:self.queryLiveMessages] addCreateHandler:^(PFQuery * query, PFObject *object) {
         Message *message = [Message initWithPFObject:object];
         if (![message.sender.objectId isEqual:PFUser.currentUser.objectId]) {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -147,6 +150,18 @@ static NSString *const kMessageDetailsSegue = @"messageDetails";
                 [self.tableView reloadData];
             });
         }
+    }];
+}
+
+- (void)liveQueryLikes {
+    self.queryLiveLikes = [Message query];
+    [self.queryLiveLikes includeKey:kObjectId];
+    [self.queryLiveLikes whereKey:kMessageConversation equalTo:self.conversation];
+    self.subscriptionLikes = [[self.client subscribeToQuery:self.queryLiveLikes] addUpdateHandler:^(PFQuery * query, PFObject *object) {
+        Message *message = [Message initWithPFObject:object];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self updateLikes:message];
+            });
     }];
 }
 
@@ -232,6 +247,17 @@ static NSString *const kMessageDetailsSegue = @"messageDetails";
 
 - (void)didSwipe:(UISwipeGestureRecognizer*)swipe{
     [self performSegueWithIdentifier:kMessageDetailsSegue sender:swipe];
+}
+
+- (void)updateLikes:(Message*)liveMessage {
+    for (Message *message in self.arrayOfMessages) {
+        if ([message.objectId isEqualToString:liveMessage.objectId]) {
+            NSUInteger index = [self.arrayOfMessages indexOfObject:message];
+            self.arrayOfMessages[index] = liveMessage;
+            [self.tableView reloadData];
+            break;
+        }
+    }
 }
 
 #pragma mark - Navigation
