@@ -32,6 +32,7 @@ PODS:
     - Bolts-Swift (~> 1.5.0)
     - Parse (~> 1.19.0)
     - Starscream (~> 4.0.4)
+  - Shimmer (1.0.2)
   - Starscream (4.0.4)
 
 DEPENDENCIES:
@@ -40,6 +41,7 @@ DEPENDENCIES:
   - Parse
   - Parse/UI
   - ParseLiveQuery
+  - Shimmer
 
 SPEC REPOS:
   trunk:
@@ -49,6 +51,7 @@ SPEC REPOS:
     - Bolts-Swift
     - Parse
     - ParseLiveQuery
+    - Shimmer
     - Starscream
 
 SPEC CHECKSUMS:
@@ -58,8 +61,9 @@ SPEC CHECKSUMS:
   Bolts-Swift: afbbaf8c8186e7f769be4afa656949c14087ba44
   Parse: 0abb63a0ff6fa34a3f64b81d595a294e2ece143a
   ParseLiveQuery: 7bc437c3b986880ffe5f241a9921e37f45df0677
+  Shimmer: c5374be1c2b0c9e292fb05b339a513cf291cac86
   Starscream: 5178aed56b316f13fa3bc55694e583d35dd414d9
 
-PODFILE CHECKSUM: be1e1620366e4338d4c1ac3513888863ea9f5dfb
+PODFILE CHECKSUM: 6b5b1fd0d949a0715287c57444d62706dd960d0b
 
 COCOAPODS: 1.11.3
