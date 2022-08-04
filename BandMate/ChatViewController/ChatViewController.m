@@ -30,6 +30,8 @@ static NSString *const kMessageCreatedAt = @"createdAt";
 // For send button
 static NSString *const kEmptyString = @"";
 static int const kIndexInsertion = 0;
+// Query settings
+static int const kQueryLimit = 20;
 
 @interface ChatViewController () <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -39,6 +41,8 @@ static int const kIndexInsertion = 0;
 @property (strong, nonatomic) PFLiveQueryClient *client;
 @property (strong, nonatomic) PFQuery *query;
 @property (strong, nonatomic) PFLiveQuerySubscription *subscription;
+@property (strong, nonatomic) Message *lastMessage;
+@property BOOL isMoreDataLoading;
 @property CGFloat originalHeight;
 @end
 
@@ -80,6 +84,7 @@ static int const kIndexInsertion = 0;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.transform = CGAffineTransformMakeScale (kXfactor, kYfactor);
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    self.isMoreDataLoading = NO;
     // For returning view after keyboard dismiss
     self.originalHeight = self.view.frame.size.height;
     // Load conversation
@@ -96,12 +101,33 @@ static int const kIndexInsertion = 0;
     [query whereKey:kMessageConversation equalTo:self.conversation];
     [query includeKey:kMessageSender];
     [query orderByDescending:kMessageCreatedAt];
+    query.limit = kQueryLimit;
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if (error) {
             NSLog(@"Error loading messages: %@", [error localizedDescription]);
         } else {
             self.arrayOfMessages = [NSMutableArray arrayWithArray:objects];
+            self.lastMessage = [self.arrayOfMessages lastObject];
             [self.tableView reloadData];
+        }
+    }];
+}
+
+- (void)loadMoreData {
+    PFQuery *query = [Message query];
+    [query whereKey:kMessageConversation equalTo:self.conversation];
+    [query whereKey:kMessageCreatedAt lessThan:self.lastMessage.createdAt];
+    [query includeKey:kMessageSender];
+    [query orderByDescending:kMessageCreatedAt];
+    query.limit = kQueryLimit;
+    [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"Error loading messages: %@", [error localizedDescription]);
+        } else {
+                self.isMoreDataLoading = NO;
+                [self.arrayOfMessages addObjectsFromArray:objects];
+                self.lastMessage = [self.arrayOfMessages lastObject];
+                [self.tableView reloadData];
         }
     }];
 }
@@ -139,6 +165,17 @@ static int const kIndexInsertion = 0;
         cell.contentView.transform = CGAffineTransformMakeScale(kXfactor, kYfactor);
         [cell setMessage:message];
         return cell;
+    }
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if(!self.isMoreDataLoading) {
+        int scrollViewContentHeight = self.tableView.contentSize.height;
+        int scrollOffsetThreshold = scrollViewContentHeight - self.tableView.bounds.size.height;
+        if(scrollView.contentOffset.y > scrollOffsetThreshold && self.tableView.isDragging && self.lastMessage) {
+            self.isMoreDataLoading = true;
+            [self loadMoreData];
+        }
     }
 }
 
