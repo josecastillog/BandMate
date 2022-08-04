@@ -17,6 +17,9 @@ static NSString *const kUserInstrumentType = @"instrumentType";
 static NSString *const kUserName = @"name";
 static NSString *const kUserUsername = @"username";
 static NSString *const kUserProfileImage = @"profileImage";
+// Alerts
+static NSString *const kActionTitle = @"Ok";
+static NSString *const kEmptyString = @"";
 
 @interface ProfileViewController () <UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UIGestureRecognizerDelegate, UINavigationControllerDelegate>
 @property (strong, nonatomic) IBOutlet PFImageView *imgView;
@@ -72,12 +75,12 @@ static NSString *const kUserProfileImage = @"profileImage";
     [PFUser.currentUser setObject:[self getPFFileFromImage:image] forKey:kUserProfileImage];
     [PFUser.currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if (error) {
-            NSLog(@"Error uploading image: %@", error.localizedDescription);
+            [self dismissViewControllerAnimated:YES completion:nil];
+            [self alert:error.localizedDescription];
         } else {
-            NSLog(@"Successfully uploaded profile image");
+            [self dismissViewControllerAnimated:YES completion:nil];
         }
     }];
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (PFFileObject *)getPFFileFromImage: (UIImage * _Nullable)image {
@@ -105,9 +108,8 @@ static NSString *const kUserProfileImage = @"profileImage";
     
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if (error) {
-            NSLog(@"Error loading artists: %@", error.localizedDescription);
+            [self alert:error.localizedDescription];
         } else {
-            NSLog(@"Successfully retrieved artists");
             self.arrayOfArtists = objects;
             [self.tableView reloadData];
         }
@@ -129,14 +131,25 @@ static NSString *const kUserProfileImage = @"profileImage";
 - (IBAction)didTapLogout:(id)sender {
     [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
         if (error) {
-            NSLog(@"Error: %@", error.localizedDescription);
+            [self alert:error.localizedDescription];
         } else {
-            NSLog(@"User logout successfully");
             SceneDelegate *myDelegate = (SceneDelegate *)self.view.window.windowScene.delegate;
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
             myDelegate.window.rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
         }
     }];
+}
+
+- (void)alert:(NSString*)message {
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:message
+                                   message:kEmptyString
+                                   preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:kActionTitle style:UIAlertActionStyleDefault
+                                   handler:^(UIAlertAction * action) {}];
+     
+    [alert addAction:defaultAction];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 @end

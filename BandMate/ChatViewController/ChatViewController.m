@@ -35,6 +35,8 @@ static int const kIndexInsertion = 0;
 static int const kQueryLimit = 20;
 // Segue identifier
 static NSString *const kMessageDetailsSegue = @"messageDetails";
+// Alerts
+static NSString *const kActionTitle = @"Ok";
 
 @interface ChatViewController () <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -111,7 +113,7 @@ static NSString *const kMessageDetailsSegue = @"messageDetails";
     query.limit = kQueryLimit;
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if (error) {
-            NSLog(@"Error loading messages: %@", [error localizedDescription]);
+            [self alert:error.localizedDescription];
         } else {
             self.arrayOfMessages = [NSMutableArray arrayWithArray:objects];
             self.lastMessage = [self.arrayOfMessages lastObject];
@@ -129,7 +131,7 @@ static NSString *const kMessageDetailsSegue = @"messageDetails";
     query.limit = kQueryLimit;
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if (error) {
-            NSLog(@"Error loading messages: %@", [error localizedDescription]);
+            [self alert:error.localizedDescription];
         } else {
                 self.isMoreDataLoading = NO;
                 [self.arrayOfMessages addObjectsFromArray:objects];
@@ -258,6 +260,20 @@ static NSString *const kMessageDetailsSegue = @"messageDetails";
             break;
         }
     }
+}
+
+#pragma mark - Alerts
+
+- (void)alert:(NSString*)message {
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:message
+                                   message:kEmptyString
+                                   preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:kActionTitle style:UIAlertActionStyleDefault
+                                   handler:^(UIAlertAction * action) {}];
+     
+    [alert addAction:defaultAction];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 #pragma mark - Navigation
