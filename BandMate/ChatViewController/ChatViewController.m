@@ -9,6 +9,7 @@
 #import "ChatSendingTableViewCell.h"
 #import "ChatRecievingTableViewCell.h"
 #import "MessageDetailsViewController.h"
+#import "MatchDetailsViewController.h"
 #import "Message.h"
 @import ParseLiveQuery;
 
@@ -35,6 +36,7 @@ static int const kIndexInsertion = 0;
 static int const kQueryLimit = 20;
 // Segue identifier
 static NSString *const kMessageDetailsSegue = @"messageDetails";
+static NSString *const kMembersSegue = @"membersSegue";
 // Alerts
 static NSString *const kActionTitle = @"Ok";
 
@@ -279,11 +281,17 @@ static NSString *const kActionTitle = @"Ok";
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    MessageDetailsViewController *detailsController = [segue destinationViewController];
-    CGPoint location = [sender locationInView:self.tableView];
-    NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:location];
-    Message *message = self.arrayOfMessages[indexPath.row];
-    detailsController.message = message;
+    if ([[segue identifier] isEqualToString:kMessageDetailsSegue]) {
+        MessageDetailsViewController *detailsController = [segue destinationViewController];
+        CGPoint location = [sender locationInView:self.tableView];
+        NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:location];
+        Message *message = self.arrayOfMessages[indexPath.row];
+        detailsController.message = message;
+    }
+    if ([[segue identifier] isEqualToString:kMembersSegue]) {
+        MatchDetailsViewController *detailsController = [segue destinationViewController];
+        detailsController.match = self.conversation.match;
+    }
 }
 
 @end
