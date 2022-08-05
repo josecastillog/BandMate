@@ -7,6 +7,7 @@
 
 #import "MatchDetailsViewController.h"
 #import "DetailsTableViewCell.h"
+#import "BandMateProfileViewController.h"
 #import "Artist.h"
 #import "Conversation.h"
 #import "UIImageView+AFNetworking.h"
@@ -209,6 +210,13 @@ static NSString *const kEmptyString = @"";
      
     [alert addAction:defaultAction];
     [self presentViewController:alert animated:YES completion:nil];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    BandMateProfileViewController *bandMateProfileController = [segue destinationViewController];
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+    PFUser *user = self.arrayOfUsers[indexPath.row];
+    bandMateProfileController.user = user;
 }
 
 @end

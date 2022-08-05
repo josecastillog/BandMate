@@ -25,6 +25,7 @@
 		268C76A22887696D00D4E93B /* ProfileTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 268C76A12887696D00D4E93B /* ProfileTableCell.m */; };
 		26A8DCB32891BBED009F7D38 /* Conversation.m in Sources */ = {isa = PBXBuildFile; fileRef = 26A8DCB22891BBED009F7D38 /* Conversation.m */; };
 		26A8DCB62891BD9F009F7D38 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 26A8DCB52891BD9F009F7D38 /* Message.m */; };
+		26AA2A74289C616900A5543E /* BandMateProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26AA2A73289C616900A5543E /* BandMateProfileViewController.m */; };
 		26ADBDBA288E15AE00682B51 /* MatchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 26ADBDB9288E15AE00682B51 /* MatchTableViewCell.m */; };
 		26ADBDBD288E168600682B51 /* MatchCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 26ADBDBC288E168600682B51 /* MatchCollectionCell.m */; };
 		26ADBDC1288E383F00682B51 /* MatchDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26ADBDC0288E383F00682B51 /* MatchDetailsViewController.m */; };
@@ -94,6 +95,8 @@
 		26A8DCB22891BBED009F7D38 /* Conversation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Conversation.m; sourceTree = "<group>"; };
 		26A8DCB42891BD9F009F7D38 /* Message.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
 		26A8DCB52891BD9F009F7D38 /* Message.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
+		26AA2A72289C616900A5543E /* BandMateProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BandMateProfileViewController.h; sourceTree = "<group>"; };
+		26AA2A73289C616900A5543E /* BandMateProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BandMateProfileViewController.m; sourceTree = "<group>"; };
 		26ADBDB8288E15AE00682B51 /* MatchTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MatchTableViewCell.h; sourceTree = "<group>"; };
 		26ADBDB9288E15AE00682B51 /* MatchTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MatchTableViewCell.m; sourceTree = "<group>"; };
 		26ADBDBB288E168600682B51 /* MatchCollectionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MatchCollectionCell.h; sourceTree = "<group>"; };
@@ -226,6 +229,7 @@
 				268C769F2887692F00D4E93B /* Views */,
 				26B5688C289468A70003F89B /* MessageDetailsViewController */,
 				26ADBDD0289068F000682B51 /* ChatViewController */,
+				26AA2A71289C571E00A5543E /* BandMateProfile */,
 				26ADBDBE288E380F00682B51 /* MatchDetailsViewController */,
 				26B782BA287CEB2B004B0ADC /* MatchViewController */,
 				26ADBDC9288F5A9000682B51 /* YourBandsViewController */,
@@ -284,6 +288,15 @@
 				26F8D08B2890AE7500A62218 /* ChatRecievingTableViewCell.m */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		26AA2A71289C571E00A5543E /* BandMateProfile */ = {
+			isa = PBXGroup;
+			children = (
+				26AA2A72289C616900A5543E /* BandMateProfileViewController.h */,
+				26AA2A73289C616900A5543E /* BandMateProfileViewController.m */,
+			);
+			path = BandMateProfile;
 			sourceTree = "<group>";
 		};
 		26ADBDBE288E380F00682B51 /* MatchDetailsViewController */ = {
@@ -599,6 +612,7 @@
 				2652301C2884D927009FBAD2 /* Match.m in Sources */,
 				26B5688F289468CE0003F89B /* MessageDetailsViewController.m in Sources */,
 				263F2C8F287655A800A28601 /* RegisterViewController.m in Sources */,
+				26AA2A74289C616900A5543E /* BandMateProfileViewController.m in Sources */,
 				26ADBDCF288F63AE00682B51 /* BandsTableViewCell.m in Sources */,
 				26A8DCB32891BBED009F7D38 /* Conversation.m in Sources */,
 				26F8D08C2890AE7500A62218 /* ChatRecievingTableViewCell.m in Sources */,
