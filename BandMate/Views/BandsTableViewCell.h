@@ -7,6 +7,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Conversation.h"
+#import "FBShimmeringView.h"
 @import Parse;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -15,8 +16,11 @@ NS_ASSUME_NONNULL_BEGIN
 // Properties
 @property (weak, nonatomic) IBOutlet PFImageView *bandImgView;
 @property (weak, nonatomic) IBOutlet UILabel *bandNameLabel;
+@property (weak, nonatomic) IBOutlet FBShimmeringView *shimView;
+@property (weak, nonatomic) IBOutlet UIView *mainView;
 // Methods
 - (void)setCell:(Conversation*)conversation;
+- (void)setShimmering;
 @end
 
 NS_ASSUME_NONNULL_END
