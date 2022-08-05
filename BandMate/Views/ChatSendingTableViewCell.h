@@ -13,7 +13,10 @@ NS_ASSUME_NONNULL_BEGIN
 @interface ChatSendingTableViewCell : UITableViewCell
 // Properties
 @property (weak, nonatomic) IBOutlet UILabel *messageLabel;
+@property (weak, nonatomic) IBOutlet UILabel *likesLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *heartImgView;
 @property (weak, nonatomic) IBOutlet UIView *bubbleView;
+@property (strong, nonatomic) Message *message;
 // Methods
 - (void)setMessage:(Message*)message;
 @end

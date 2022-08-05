@@ -14,7 +14,10 @@ NS_ASSUME_NONNULL_BEGIN
 // Properties
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *messageLabel;
+@property (weak, nonatomic) IBOutlet UILabel *likeLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *heartImgView;
 @property (weak, nonatomic) IBOutlet UIView *bubbleView;
+@property (strong, nonatomic) Message *message;
 // Methods
 - (void)setMessage:(Message*)message;
 @end

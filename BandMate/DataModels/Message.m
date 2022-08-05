@@ -10,6 +10,9 @@
 static NSString *const kClassName = @"Message";
 static NSString *const kMessageSender = @"sender";
 static NSString *const kMessageContent = @"content";
+static NSString *const kLikeCount = @"likeCount";
+static NSString *const kUsersThatLiked = @"usersThatLiked";
+static NSNumber *const kIntitLikeCount = @0;
 
 @implementation Message
 
@@ -17,6 +20,8 @@ static NSString *const kMessageContent = @"content";
 @dynamic sender;
 @dynamic conversation;
 @dynamic content;
+@dynamic likeCount;
+@dynamic usersThatLiked;
 
 + (nonnull NSString *)parseClassName {
     return kClassName;
@@ -27,14 +32,19 @@ static NSString *const kMessageContent = @"content";
     message.content = content;
     message.sender = PFUser.currentUser;
     message.conversation = conversation;
+    message.likeCount = kIntitLikeCount;
+    message.usersThatLiked = [NSArray array];
     return message;
 }
 
 + (Message*)initWithPFObject:(PFObject*)object {
     Message *message = [[Message alloc] init];
     PFUser *user = [object objectForKey:kMessageSender];
+    message.objectId = object.objectId;
     message.sender = user;
     message.content = [object objectForKey:kMessageContent];
+    message.likeCount = [object objectForKey:kLikeCount];
+    message.usersThatLiked = [object objectForKey:kUsersThatLiked];
     [user fetchIfNeeded];
     return message;
 }

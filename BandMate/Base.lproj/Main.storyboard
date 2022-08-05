@@ -567,16 +567,36 @@
                                                         <constraint firstItem="JUf-0b-7mW" firstAttribute="top" secondItem="88M-7U-5jZ" secondAttribute="top" constant="10" id="toN-Yf-Hhu"/>
                                                     </constraints>
                                                 </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IBd-hV-Q8I">
+                                                    <rect key="frame" x="115" y="65" width="6.3333333333333286" height="12"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="heart.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="tpI-qd-cau">
+                                                    <rect key="frame" x="122" y="64" width="15" height="13"/>
+                                                    <color key="tintColor" systemColor="systemRedColor"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="16" id="6OT-G9-FS0"/>
+                                                        <constraint firstAttribute="width" constant="15" id="r6C-cf-81h"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="88M-7U-5jZ" firstAttribute="top" secondItem="DBn-qY-qsa" secondAttribute="top" constant="5" id="2gN-Wg-qEc"/>
                                                 <constraint firstAttribute="bottom" secondItem="88M-7U-5jZ" secondAttribute="bottom" constant="5" id="95E-5v-JVb"/>
+                                                <constraint firstAttribute="bottom" secondItem="IBd-hV-Q8I" secondAttribute="bottom" constant="3" id="FVM-Kf-uWm"/>
+                                                <constraint firstItem="IBd-hV-Q8I" firstAttribute="leading" secondItem="88M-7U-5jZ" secondAttribute="trailing" constant="1" id="ZFY-Tn-IoK"/>
                                                 <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="88M-7U-5jZ" secondAttribute="trailing" constant="276" id="c2T-oI-6ho"/>
+                                                <constraint firstAttribute="bottom" secondItem="tpI-qd-cau" secondAttribute="bottom" constant="2" id="dFt-gc-qzm"/>
                                                 <constraint firstItem="88M-7U-5jZ" firstAttribute="leading" secondItem="DBn-qY-qsa" secondAttribute="leading" constant="10" id="g3e-B2-wsA"/>
+                                                <constraint firstItem="tpI-qd-cau" firstAttribute="leading" secondItem="IBd-hV-Q8I" secondAttribute="trailing" constant="0.5" id="wcr-80-ewx"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="bubbleView" destination="88M-7U-5jZ" id="tyV-Zg-M0j"/>
+                                            <outlet property="heartImgView" destination="tpI-qd-cau" id="L0K-oW-Csq"/>
+                                            <outlet property="likeLabel" destination="IBd-hV-Q8I" id="qTf-xZ-bq8"/>
                                             <outlet property="messageLabel" destination="Hrh-5h-lcY" id="Qsy-T1-syW"/>
                                             <outlet property="nameLabel" destination="JUf-0b-7mW" id="VQq-Be-6R2"/>
                                         </connections>
@@ -610,16 +630,36 @@
                                                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="300" id="mYW-7m-b6S"/>
                                                     </constraints>
                                                 </view>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="heart.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="uBb-FO-hGC">
+                                                    <rect key="frame" x="294.66666666666669" y="29" width="15" height="13"/>
+                                                    <color key="tintColor" systemColor="systemRedColor"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="15" id="W5W-i9-vgw"/>
+                                                        <constraint firstAttribute="height" constant="16" id="fXe-tc-ouM"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zsD-j3-6vQ">
+                                                    <rect key="frame" x="288" y="30" width="6.3333333333333144" height="12"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="lcq-Lk-SfA" firstAttribute="top" secondItem="w0J-rk-jdE" secondAttribute="top" constant="5" id="2Xh-Hj-glJ"/>
                                                 <constraint firstItem="lcq-Lk-SfA" firstAttribute="leading" relation="lessThanOrEqual" secondItem="w0J-rk-jdE" secondAttribute="leading" constant="341" id="4Mt-dn-KBD"/>
+                                                <constraint firstAttribute="bottom" secondItem="uBb-FO-hGC" secondAttribute="bottom" constant="2" id="9gu-kP-IIA"/>
                                                 <constraint firstAttribute="bottom" secondItem="lcq-Lk-SfA" secondAttribute="bottom" constant="5" id="GdC-fV-Fpf"/>
                                                 <constraint firstAttribute="trailing" secondItem="lcq-Lk-SfA" secondAttribute="trailing" constant="10" id="ith-Uo-6Vn"/>
+                                                <constraint firstItem="lcq-Lk-SfA" firstAttribute="leading" secondItem="uBb-FO-hGC" secondAttribute="trailing" constant="1" id="qRd-Rd-3oy"/>
+                                                <constraint firstAttribute="bottom" secondItem="zsD-j3-6vQ" secondAttribute="bottom" constant="3" id="utv-2d-Ra1"/>
+                                                <constraint firstItem="uBb-FO-hGC" firstAttribute="leading" secondItem="zsD-j3-6vQ" secondAttribute="trailing" constant="0.5" id="wLp-mA-9HC"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="bubbleView" destination="lcq-Lk-SfA" id="UVn-bf-3tK"/>
+                                            <outlet property="heartImgView" destination="uBb-FO-hGC" id="cVk-Dn-uqy"/>
+                                            <outlet property="likesLabel" destination="zsD-j3-6vQ" id="Tq4-DY-mFc"/>
                                             <outlet property="messageLabel" destination="ech-2t-1M6" id="D0B-ui-SKi"/>
                                         </connections>
                                     </tableViewCell>
@@ -673,7 +713,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uzf-Tg-Hwa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2726" y="1580"/>
+            <point key="canvasLocation" x="2723.0769230769229" y="1579.6208530805686"/>
         </scene>
         <!--Message Details View Controller-->
         <scene sceneID="jaf-lX-GJq">
@@ -1096,6 +1136,7 @@
         <image name="default-profile-icon-16" width="1890" height="1890"/>
         <image name="gear" catalog="system" width="128" height="119"/>
         <image name="guitars" catalog="system" width="128" height="100"/>
+        <image name="heart.fill" catalog="system" width="128" height="109"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="music.mic" catalog="system" width="128" height="121"/>
         <image name="paperplane.fill" catalog="system" width="128" height="118"/>
