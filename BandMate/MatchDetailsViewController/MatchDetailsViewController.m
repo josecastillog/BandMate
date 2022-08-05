@@ -8,6 +8,7 @@
 #import "MatchDetailsViewController.h"
 #import "DetailsTableViewCell.h"
 #import "Artist.h"
+#import "Conversation.h"
 #import "UIImageView+AFNetworking.h"
 
 // User table keys
@@ -18,11 +19,14 @@ static NSString *const kUserInstrumentType = @"instrumentType";
 static NSString *const kUserUsername = @"username";
 static NSString *const kUserRelationBands = @"currentBands";
 static NSString *const kUserRelationMatch = @"Matches";
+static NSString *const kUserRelationConversation = @"conversations";
 // Match table keys
 static NSString *const kMatchMembersRelation = @"members";
 static NSString *const kMatchRelationAccepted = @"membersAccepted";
 // Artist table keys
 static NSString *const kArtistArtistId = @"artistID";
+// Conversation table keys
+static NSString *const kConversationMatch = @"match";
 // Buttons settings
 static int const kButtonCornerRadius = 20;
 // Artist image settings
@@ -128,8 +132,45 @@ static NSString *const kCellName = @"ProfileCell";
     PFRelation *matchRelation = [self.match relationForKey:kMatchRelationAccepted];
     [matchRelation addObject:PFUser.currentUser];
     [self.match saveInBackground];
+    PFQuery *query = [Conversation query];
+    [query whereKey:kConversationMatch equalTo: self.match];
+    [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"Unable to retrieve conversation");
+        } else {
+            Conversation *conversation = [objects firstObject];
+            objects.count > 0 ? [self didTapAcceptHelper:conversation] : [self didTapAcceptHelper:nil];
+        }
+    }];
     [self.navigationController popViewControllerAnimated:YES];
     [self.delegate didTapAcceptDeclineButton:self.match];
+}
+
+- (void)didTapAcceptHelper:(Conversation*)conversation {
+    if (conversation) {
+        [conversation addParticipant:PFUser.currentUser];
+        [conversation saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+            if (error) {
+                NSLog(@"Unable to save conversation");
+            } else {
+                PFRelation *userRelation = [PFUser.currentUser relationForKey:kUserRelationConversation];
+                [userRelation addObject:conversation];
+                [PFUser.currentUser saveInBackground];
+            }
+        }];
+    } else {
+        Conversation *conversation = [Conversation initWithMatch:self.match];
+        [conversation addParticipant:PFUser.currentUser];
+        [conversation saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+            if (error) {
+                NSLog(@"Unable to save conversation");
+            } else {
+                PFRelation *userRelation = [PFUser.currentUser relationForKey:kUserRelationConversation];
+                [userRelation addObject:conversation];
+                [PFUser.currentUser saveInBackground];
+            }
+        }];
+    }
 }
 
 - (IBAction)didTapDecline:(id)sender {
