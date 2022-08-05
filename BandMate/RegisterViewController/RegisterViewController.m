@@ -9,8 +9,8 @@
 #import "Parse/Parse.h"
 
 // Dropdown buttons
-static NSArray *const kInstruments = @[@"Guitar", @"Bass", @"Singer", @"Drums"];
-static NSArray *const kExpertiseLevels = @[@"Beginner", @"Intermidiate", @"Advanced"];
+static NSArray *const kInstruments = @[@"Instrument Type", @"Guitar", @"Bass", @"Singer", @"Drums"];
+static NSArray *const kExpertiseLevels = @[@"Expertise Level", @"Beginner", @"Intermidiate", @"Advanced"];
 static NSString *const kDefaultInstrumentPopUp = @"Instrument Type";
 static NSString *const kDefaultExpertisePopUp = @"Expertise Level";
 // User table keys
@@ -49,44 +49,29 @@ static NSString *const kEmptyString = @"";
 }
 
 - (void)dropDownButtons {
-    UIAction *emptyInstrument = [UIAction actionWithTitle:kDefaultInstrumentPopUp image:NULL identifier:NULL handler:^(UIAction *action) {
-        self.instrumentType = nil;
-    }];
-    UIAction *guitar = [UIAction actionWithTitle:kInstruments[0] image:NULL identifier:NULL handler:^(UIAction *action) {
-        self.instrumentType = kInstruments[0];
-    }];
-    UIAction *bass = [UIAction actionWithTitle:kInstruments[1] image:NULL identifier:NULL handler:^(UIAction *action) {
-        self.instrumentType = kInstruments[1];
-    }];
-    UIAction *singer = [UIAction actionWithTitle:kInstruments[2] image:NULL identifier:NULL handler:^(UIAction *action) {
-        self.instrumentType = kInstruments[2];
-    }];
-    UIAction *drums = [UIAction actionWithTitle:kInstruments[3] image:NULL identifier:NULL handler:^(UIAction *action) {
-        self.instrumentType = kInstruments[3];
-    }];
-    UIMenu *menuInstrument = [[UIMenu alloc] menuByReplacingChildren:[NSArray arrayWithObjects:emptyInstrument, guitar, bass, singer, drums, nil]];
-    
+    // Instument type drop down
+    NSMutableArray *instrumentActions = [NSMutableArray array];
+    for (NSString* instrument in kInstruments) {
+        UIAction *dropDownButton = [UIAction actionWithTitle:instrument image:NULL identifier:NULL handler:^(UIAction *action) {
+            self.instrumentType = instrument;
+        }];
+        [instrumentActions addObject:dropDownButton];
+    }
+    UIMenu *menuInstrument = [[UIMenu alloc] menuByReplacingChildren:instrumentActions];
     self.instrumentPopUp.layer.cornerRadius = kCornerRadius;
     self.instrumentPopUp.layer.borderWidth = kBorderWidth;
     self.instrumentPopUp.menu = menuInstrument;
     self.instrumentPopUp.showsMenuAsPrimaryAction = YES;
     self.instrumentPopUp.changesSelectionAsPrimaryAction = YES;
-    
-    UIAction *emptyExpertise = [UIAction actionWithTitle:kDefaultExpertisePopUp image:NULL identifier:NULL handler:^(UIAction *action) {
-        self.expertiseLevel = nil;
-    }];
-    UIAction *beginner = [UIAction actionWithTitle:kExpertiseLevels[0] image:NULL identifier:NULL handler:^(UIAction *action) {
-        self.expertiseLevel = kExpertiseLevels[0];
-    }];
-    UIAction *intermediate = [UIAction actionWithTitle:kExpertiseLevels[1] image:NULL identifier:NULL handler:^(UIAction *action) {
-        self.expertiseLevel = kExpertiseLevels[1];
-    }];
-    UIAction *advanced = [UIAction actionWithTitle:kExpertiseLevels[2] image:NULL identifier:NULL handler:^(UIAction *action) {
-        self.expertiseLevel = kExpertiseLevels[2];
-    }];
-    
-    UIMenu *menuExpertise = [[UIMenu alloc] menuByReplacingChildren:[NSArray arrayWithObjects:emptyExpertise, beginner, intermediate, advanced, nil]];
-    
+    // Expertise drop down
+    NSMutableArray *expertiseActions = [NSMutableArray array];
+    for (NSString* expertise in kExpertiseLevels) {
+        UIAction *dropDownButton = [UIAction actionWithTitle:expertise image:NULL identifier:NULL handler:^(UIAction *action) {
+            self.expertiseLevel = expertise;
+        }];
+        [expertiseActions addObject:dropDownButton];
+    }
+    UIMenu *menuExpertise = [[UIMenu alloc] menuByReplacingChildren:expertiseActions];
     self.expertisePopUp.layer.cornerRadius = kCornerRadius;
     self.expertisePopUp.layer.borderWidth = kBorderWidth;
     self.expertisePopUp.menu = menuExpertise;
@@ -97,7 +82,8 @@ static NSString *const kEmptyString = @"";
 - (IBAction)didTapSignUp:(id)sender {
     // Check if fileds are not empty
     if ([self.usernameField.text isEqualToString:kEmptyString] || [self.emailField.text isEqualToString:kEmptyString] || [self.passwordField.text isEqualToString:kEmptyString] ||
-        [self.repeatPasswordField.text isEqualToString:kEmptyString] || [self.nameField.text isEqualToString:kEmptyString] || !self.instrumentType || !self.expertiseLevel) {
+        [self.repeatPasswordField.text isEqualToString:kEmptyString] || [self.nameField.text isEqualToString:kEmptyString] || [self.instrumentType isEqualToString:kDefaultInstrumentPopUp] ||
+        [self.expertiseLevel isEqualToString:kDefaultExpertisePopUp] || !self.instrumentType || !self.expertiseLevel) {
         [self alert:kMissingFields];
     }
     else {

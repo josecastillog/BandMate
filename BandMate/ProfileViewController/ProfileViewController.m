@@ -20,14 +20,23 @@ static NSString *const kUserProfileImage = @"profileImage";
 // Alerts
 static NSString *const kActionTitle = @"Ok";
 static NSString *const kEmptyString = @"";
+static NSString *const kUserFavArtist = @"fav_artists";
+// Artist table keys
+static NSString *const kArtistArtistID = @"artistID";
+// Table view
+static NSString *const kCellName = @"ProfileCell";
+// Storyboard
+static NSString *const kStoryboardName = @"main";
+// LoginViewController identifier
+static NSString *const kLoginViewController = @"LoginViewController";
 
 @interface ProfileViewController () <UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UIGestureRecognizerDelegate, UINavigationControllerDelegate>
 @property (strong, nonatomic) IBOutlet PFImageView *imgView;
+@property (strong, nonatomic) NSArray *arrayOfArtists;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *instrumentLabel;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
-@property (strong, nonatomic) NSArray *arrayOfArtists;
 @end
 
 @implementation ProfileViewController
@@ -96,7 +105,7 @@ static NSString *const kEmptyString = @"";
 }
 
 - (void)setProfileImage {
-    if (PFUser.currentUser[@"profileImage"]) {
+    if (PFUser.currentUser[kUserProfileImage]) {
         self.imgView.file = PFUser.currentUser[kUserProfileImage];
         [self.imgView loadInBackground];
     }
@@ -104,7 +113,7 @@ static NSString *const kEmptyString = @"";
 
 - (void)queryTopArtists {
     PFQuery *query = [Artist query];
-    [query whereKey:@"artistID" containedIn: [PFUser.currentUser objectForKey: @"fav_artists"]];
+    [query whereKey:kArtistArtistID containedIn: [PFUser.currentUser objectForKey: kUserFavArtist]];
     
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if (error) {
@@ -121,7 +130,7 @@ static NSString *const kEmptyString = @"";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    ProfileTableCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"ProfileCell"
+    ProfileTableCell *cell = [self.tableView dequeueReusableCellWithIdentifier:kCellName
                                                                  forIndexPath:indexPath];
     Artist *artist = self.arrayOfArtists[indexPath.row];
     [cell setArtist:artist];
@@ -134,8 +143,8 @@ static NSString *const kEmptyString = @"";
             [self alert:error.localizedDescription];
         } else {
             SceneDelegate *myDelegate = (SceneDelegate *)self.view.window.windowScene.delegate;
-            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-            myDelegate.window.rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:kStoryboardName bundle:nil];
+            myDelegate.window.rootViewController = [storyboard instantiateViewControllerWithIdentifier:kLoginViewController];
         }
     }];
 }
