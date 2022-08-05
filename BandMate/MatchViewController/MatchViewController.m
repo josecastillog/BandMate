@@ -51,7 +51,12 @@ static NSString* kSuiteName = @"bandmate.authState";
 static NSString *const kActionTitle = @"Ok";
 static NSString *const kSpotifyAuthAlert = @"Spotify Authentication could not be completed.";
 static NSString *const kSpotifyFetchAlert = @"Error while retrieving data from Spotify";
+static NSString *const kAcceptTitle = @"Match accepted!";
+static NSString *const kAcceptMessage = @"Match accepted!";
+static NSString *const kDeclineTitle = @"Match declined";
+static NSString *const kDeclineMessage = @"Your match has been declined";
 static NSString *const kEmptyString = @"";
+static CGFloat const kAnimationTimeInterval = 2.5;
 
 @interface MatchViewController () <UITableViewDelegate, UITableViewDataSource, MatchDetailsViewControllerDelegate>
 @property (strong, nonatomic) NSArray *arrayOfArtists;
@@ -280,9 +285,28 @@ static NSString *const kEmptyString = @"";
     [self presentViewController:alert animated:YES completion:nil];
 }
 
+- (void)showAcceptDeclineAlert:(NSString*)title :(NSString*)message {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    [self presentViewController:alert animated:YES completion:nil];
+    [NSTimer scheduledTimerWithTimeInterval:kAnimationTimeInterval repeats:NO block:^(NSTimer *_Nonnull timer) {
+        [alert dismissViewControllerAnimated:YES completion:nil];
+    }];
+}
+
 #pragma mark - Helper Functions
 
-- (void)didTapAcceptDeclineButton:(Match *)match {
+- (void)didTapAcceptButton:(Match *)match {
+    UIImpactFeedbackGenerator *generator = [[UIImpactFeedbackGenerator alloc] initWithStyle:UIImpactFeedbackStyleHeavy];
+    [generator impactOccurred];
+    [self showAcceptDeclineAlert:kAcceptTitle :kAcceptMessage];
+    [self.arrayOfMatches removeObject:match];
+    [self.tableView reloadData];
+}
+
+- (void)didTapDeclineButton:(Match *)match {
+    UIImpactFeedbackGenerator *generator = [[UIImpactFeedbackGenerator alloc] initWithStyle:UIImpactFeedbackStyleMedium];
+    [generator impactOccurred];
+    [self showAcceptDeclineAlert:kDeclineTitle :kDeclineMessage];
     [self.arrayOfMatches removeObject:match];
     [self.tableView reloadData];
 }

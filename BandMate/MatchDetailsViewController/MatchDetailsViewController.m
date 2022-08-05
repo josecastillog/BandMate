@@ -171,7 +171,7 @@ static NSString *const kEmptyString = @"";
                 [userRelation addObject:conversation];
                 [PFUser.currentUser saveInBackground];
                 [self.navigationController popViewControllerAnimated:YES];
-                [self.delegate didTapAcceptDeclineButton:self.match];
+                [self.delegate didTapAcceptButton:self.match];
             }
         }];
     }
@@ -185,7 +185,7 @@ static NSString *const kEmptyString = @"";
     [matchRelation removeObject:PFUser.currentUser];
     [self.match saveInBackground];
     [self.navigationController popViewControllerAnimated:YES];
-    [self.delegate didTapAcceptDeclineButton:self.match];
+    [self.delegate didTapDeclineButton:self.match];
 }
 
 
