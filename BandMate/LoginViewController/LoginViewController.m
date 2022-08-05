@@ -8,7 +8,7 @@
 #import "LoginViewController.h"
 #import "Parse/Parse.h"
 
-static NSString *const KEmptyString = @"";
+static NSString *const kEmptyString = @"";
 // Alerts
 static NSString *const kAlertTitle = @"Error";
 static NSString *const kAlertActionTitle = @"Ok";
@@ -32,7 +32,7 @@ static NSString *const kSegueIdentifier = @"afterLoginSegue";
     NSString *username = self.usernameField.text;
     NSString *password = self.passwordField.text;
     
-    if ([username isEqualToString:KEmptyString] || [password isEqualToString:KEmptyString]) {
+    if ([username isEqualToString:kEmptyString] || [password isEqualToString:kEmptyString]) {
         [self alert:kCompleteFieldsAlert];
     } else {
         [PFUser logInWithUsernameInBackground:username password:password block:^(PFUser * _Nullable user, NSError * _Nullable error) {
