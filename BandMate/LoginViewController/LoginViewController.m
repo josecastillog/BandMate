@@ -8,6 +8,14 @@
 #import "LoginViewController.h"
 #import "Parse/Parse.h"
 
+static NSString *const kEmptyString = @"";
+// Alerts
+static NSString *const kAlertTitle = @"Error";
+static NSString *const kAlertActionTitle = @"Ok";
+static NSString *const kCompleteFieldsAlert = @"Please complete all required fields.";
+// Segue
+static NSString *const kSegueIdentifier = @"afterLoginSegue";
+
 @interface LoginViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
@@ -17,7 +25,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
 }
 
 - (IBAction)didTapLogin:(id)sender {
@@ -25,16 +32,14 @@
     NSString *username = self.usernameField.text;
     NSString *password = self.passwordField.text;
     
-    if ([username isEqualToString:@""] || [password isEqualToString:@""]) {
-        [self alert:@"Please complete all required fields."];
+    if ([username isEqualToString:kEmptyString] || [password isEqualToString:kEmptyString]) {
+        [self alert:kCompleteFieldsAlert];
     } else {
         [PFUser logInWithUsernameInBackground:username password:password block:^(PFUser * _Nullable user, NSError * _Nullable error) {
                     if (error != nil) {
-                        NSLog(@"User log in failed: %@", error.localizedDescription);
-                        [self alert:@"Incorrect username or password."];
+                        [self alert:error.localizedDescription];
                     } else {
-                        NSLog(@"User logged in successfully");
-                        [self performSegueWithIdentifier:@"afterLoginSegue" sender:(id)sender];
+                        [self performSegueWithIdentifier:kSegueIdentifier sender:(id)sender];
                     }
         }];
     }
@@ -42,25 +47,15 @@
 }
 
 - (void)alert:(NSString*)message  {
-    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Error"
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:kAlertTitle
                                    message:message
                                    preferredStyle:UIAlertControllerStyleAlert];
     
-    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:kAlertActionTitle style:UIAlertActionStyleDefault
                                    handler:^(UIAlertAction * action) {}];
      
     [alert addAction:defaultAction];
     [self presentViewController:alert animated:YES completion:nil];
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

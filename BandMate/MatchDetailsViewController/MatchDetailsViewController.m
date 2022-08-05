@@ -34,6 +34,9 @@ static int const kImageCornerRadiues = 10;
 static NSString *const kDictionaryKey = @"url";
 // Table view settings
 static NSString *const kCellName = @"ProfileCell";
+// Alerts
+static NSString *const kActionTitle = @"Ok";
+static NSString *const kEmptyString = @"";
 
 @interface MatchDetailsViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -69,7 +72,7 @@ static NSString *const kCellName = @"ProfileCell";
     [query whereKey:kArtistArtistId equalTo:self.match.artistID];
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if (error) {
-            NSLog(@"Error retrieving artist: %@", [error localizedDescription]);
+            [self alert:error.localizedDescription];
         } else {
             [self setArtist:[objects firstObject]];
         }
@@ -88,7 +91,7 @@ static NSString *const kCellName = @"ProfileCell";
     
     [queryMembers findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if (error) {
-            NSLog(@"Error retrieving members: %@", [error localizedDescription]);
+            [self alert:error.localizedDescription];
         } else {
             self.arrayOfUsers = [NSArray arrayWithArray:objects];
             [self.tableView reloadData];
@@ -136,14 +139,12 @@ static NSString *const kCellName = @"ProfileCell";
     [query whereKey:kConversationMatch equalTo: self.match];
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if (error) {
-            NSLog(@"Unable to retrieve conversation");
+            [self alert:error.localizedDescription];
         } else {
             Conversation *conversation = [objects firstObject];
             objects.count > 0 ? [self didTapAcceptHelper:conversation] : [self didTapAcceptHelper:nil];
         }
     }];
-    [self.navigationController popViewControllerAnimated:YES];
-    [self.delegate didTapAcceptDeclineButton:self.match];
 }
 
 - (void)didTapAcceptHelper:(Conversation*)conversation {
@@ -151,7 +152,7 @@ static NSString *const kCellName = @"ProfileCell";
         [conversation addParticipant:PFUser.currentUser];
         [conversation saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
             if (error) {
-                NSLog(@"Unable to save conversation");
+                [self alert:error.localizedDescription];
             } else {
                 PFRelation *userRelation = [PFUser.currentUser relationForKey:kUserRelationConversation];
                 [userRelation addObject:conversation];
@@ -163,11 +164,13 @@ static NSString *const kCellName = @"ProfileCell";
         [conversation addParticipant:PFUser.currentUser];
         [conversation saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
             if (error) {
-                NSLog(@"Unable to save conversation");
+                [self alert:error.localizedDescription];
             } else {
                 PFRelation *userRelation = [PFUser.currentUser relationForKey:kUserRelationConversation];
                 [userRelation addObject:conversation];
                 [PFUser.currentUser saveInBackground];
+                [self.navigationController popViewControllerAnimated:YES];
+                [self.delegate didTapAcceptDeclineButton:self.match];
             }
         }];
     }
@@ -194,6 +197,18 @@ static NSString *const kCellName = @"ProfileCell";
     PFUser *user = self.arrayOfUsers[indexPath.row];
     [cell setCell:user];
     return cell;
+}
+
+- (void)alert:(NSString*)message {
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:message
+                                   message:kEmptyString
+                                   preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:kActionTitle style:UIAlertActionStyleDefault
+                                   handler:^(UIAlertAction * action) {}];
+     
+    [alert addAction:defaultAction];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 @end

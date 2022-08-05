@@ -32,6 +32,7 @@ static double const kPositionY = 0;
 static double const kWidth = 200;
 static double const kHeight = 90;
 static double const kCornerRadius = 20;
+static NSString *const kButtonTitle = @"Connect Spotify and start matching!";
 // Table view settings
 static NSString* kCellName = @"MatchCell";
 // User table keys
@@ -46,6 +47,11 @@ static NSString* kMatchNumberOfMembers = @"numberOfMembers";
 static NSNumber* kMaxNumberOfMembers = @4;
 // NSUserDefaults
 static NSString* kSuiteName = @"bandmate.authState";
+// Alerts
+static NSString *const kActionTitle = @"Ok";
+static NSString *const kSpotifyAuthAlert = @"Spotify Authentication could not be completed.";
+static NSString *const kSpotifyFetchAlert = @"Error while retrieving data from Spotify";
+static NSString *const kEmptyString = @"";
 
 @interface MatchViewController () <UITableViewDelegate, UITableViewDataSource, MatchDetailsViewControllerDelegate>
 @property (strong, nonatomic) NSArray *arrayOfArtists;
@@ -107,7 +113,7 @@ static NSString* kSuiteName = @"bandmate.authState";
 
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if (error) {
-            NSLog(@"Error loading user's existing matches: %@", [error localizedDescription]);
+            [self alert:error.localizedDescription];
         } else {
             self.arrayOfMatches = [NSMutableArray arrayWithArray:objects];
             self.arrayOfMatches.count > 0 ? self.tableView.reloadData: [Match startMatching];
@@ -125,7 +131,7 @@ static NSString* kSuiteName = @"bandmate.authState";
     [OIDAuthorizationService discoverServiceConfigurationForIssuer:issuer completion:^(OIDServiceConfiguration * _Nullable configuration, NSError * _Nullable error) {
         
         if (!configuration) {
-            NSLog(@"Error retrieving discovery document: %@", [error localizedDescription]);
+            [self alert:kSpotifyAuthAlert];
             return;
         }
         
@@ -142,12 +148,11 @@ static NSString* kSuiteName = @"bandmate.authState";
         AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
         appDelegate.currentAuthorizationFlow = [OIDAuthState authStateByPresentingAuthorizationRequest:request presentingViewController:self callback:^(OIDAuthState * _Nullable authState, NSError * _Nullable error) {
             if (authState) {
-                NSLog(@"Got authorization tokes. Access tokes: %@", authState.lastTokenResponse.accessToken);
                 [self setAuthState:authState];
                 [self saveState];
                 [self getTopArtists];
             } else {
-                NSLog(@"Authorization error: %@", [error localizedDescription]);
+                [self alert:kSpotifyAuthAlert];
                 [self setAuthState:nil];
             }
         }];
@@ -187,7 +192,7 @@ static NSString* kSuiteName = @"bandmate.authState";
     [self.authState performActionWithFreshTokens:^(NSString * _Nullable accessToken, NSString * _Nullable idToken, NSError * _Nullable error) {
         
         if (error != nil) {
-            NSLog(@"Error: %@", [error localizedDescription]);
+            [self alert:error.localizedDescription];
         } else {
             NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
             
@@ -204,7 +209,7 @@ static NSString* kSuiteName = @"bandmate.authState";
             [[session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                 
                 if (error) {
-                    NSLog(@"Error: %@", [error localizedDescription]);
+                    [self alert:kSpotifyFetchAlert];
                     return;
                 }
                 
@@ -217,12 +222,11 @@ static NSString* kSuiteName = @"bandmate.authState";
                 // Saves artists to DB
                 [PFObject saveAllInBackground:self.arrayOfArtists block:^(BOOL succeeded, NSError * _Nullable error) {
                     if (!error || [error code] == 137) {
-                        NSLog(@"Successfully saved array of artists");
                         [Match startMatching];
                         [self.spotifyButton removeFromSuperview];
                         [self setMatchingScreen];
                     } else {
-                        NSLog(@"Error saving array of artists: %@", error);
+                        [self alert:error.localizedDescription];
                     }
                 }];
                 
@@ -236,11 +240,9 @@ static NSString* kSuiteName = @"bandmate.authState";
                 [PFUser.currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
                     
                     if (error) {
-                        NSLog(@"Error saving favorite artists and genres: %@", [error localizedDescription]);
-                    } else {
-                        NSLog(@"Successfully saved fav artists and genres");
+                        [self alert:error.localizedDescription];
                     }
-                                    
+                    
                 }];
 
             }] resume];
@@ -248,6 +250,20 @@ static NSString* kSuiteName = @"bandmate.authState";
         
     }];
     
+}
+
+#pragma mark - Alerts
+
+- (void)alert:(NSString*)message {
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:message
+                                   message:kEmptyString
+                                   preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:kActionTitle style:UIAlertActionStyleDefault
+                                   handler:^(UIAlertAction * action) {}];
+     
+    [alert addAction:defaultAction];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 #pragma mark - Helper Functions
