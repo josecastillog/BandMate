@@ -16,7 +16,7 @@ Bandmate is an iOS app intended to connect musicians from all expertise levels. 
 - **Story:** Musicians are able to connect with eachother and potentially jam together after they match.
 - **Market:** Musicians from all expertice levels. This includes beginners, intermediates and advanced musicians.
 - **Habit:** This app is used to connect with other musicians. Could be used often if chatting with eachother.
-- **Scope:** 
+- **Scope:** It has a very specific musician niche.
 
 ## Product Spec
 ### 1. User Stories (Required and Optional)
