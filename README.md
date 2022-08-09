@@ -91,6 +91,11 @@ Bandmate is an iOS app intended to connect musicians from all expertise levels. 
 ## Wireframes
 <img src="https://i.imgur.com/QAgK5gV.jpeg" width=600>
 
+## Screenshots
+<img src="https://user-images.githubusercontent.com/69658875/183717417-852827e5-3010-44e2-8442-3667ecfd01e2.png" width="200" height="400" /> <img src="https://user-images.githubusercontent.com/69658875/183717432-e8e11845-8643-4f00-ada1-d50601d5d515.png" width="200" height="400" /> <img src="https://user-images.githubusercontent.com/69658875/183717443-3899c4ea-0751-45e8-a675-ac2b7807ac22.png" width="200" height="400" /> <img src="https://user-images.githubusercontent.com/69658875/183717451-875a0292-ec71-4879-8de3-8bcabeb640ea.png" width="200" height="400" />
+
+<img src="https://user-images.githubusercontent.com/69658875/183721209-b9c33467-af54-4e08-886b-9b5663b44930.png" width="200" height="400" /> <img src="https://user-images.githubusercontent.com/69658875/183717594-fc190000-2738-4b99-9a64-d219c7e58f6d.png" width="200" height="400" /> <img src="https://user-images.githubusercontent.com/69658875/183721470-7b8d08a9-6da8-412d-8032-042b238ad9f4.png" width="200" height="400" /> <img src="https://user-images.githubusercontent.com/69658875/183717614-a9d10213-906c-47a4-aff9-8d25af442566.png" width="200" height="400" /> <img src="https://user-images.githubusercontent.com/69658875/183717616-88b45b9c-caac-446d-bbce-273e2b25675e.png" width="200" height="400" /> <img src="https://user-images.githubusercontent.com/69658875/183717624-34dfa394-5570-4c35-8d8a-6ac0ad41fae0.png" width="200" height="400" />
+
 ## Data Models
 **User**
 | Property      | Type           |Description |
