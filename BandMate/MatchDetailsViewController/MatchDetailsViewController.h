@@ -11,7 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol MatchDetailsViewControllerDelegate
-- (void)didTapAcceptDeclineButton:(Match *)match;
+- (void)didTapAcceptButton:(Match *)match;
+- (void)didTapDeclineButton:(Match *)match;
 @end
 
 @interface MatchDetailsViewController : ViewController

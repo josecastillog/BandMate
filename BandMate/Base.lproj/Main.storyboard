@@ -396,13 +396,6 @@
                         <viewLayoutGuide key="safeArea" id="dJX-06-FHZ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="bco-66-djS">
-                        <barButtonItem key="leftBarButtonItem" title="Item" image="chevron.backward" catalog="system" id="wb3-0T-jGd">
-                            <connections>
-                                <action selector="didTapBack:" destination="kMi-Ao-3LB" id="I0H-iF-bEB"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
                     <connections>
                         <outlet property="acceptButton" destination="eq1-wc-31g" id="Fbd-GU-6YW"/>
                         <outlet property="artistImgView" destination="q0L-u7-Gix" id="XMb-ab-XEe"/>
@@ -1455,7 +1448,6 @@
         <segue reference="qvg-kw-f6E"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="chevron.backward" catalog="system" width="96" height="128"/>
         <image name="default-profile-icon-16" width="1890" height="1890"/>
         <image name="gear" catalog="system" width="128" height="119"/>
         <image name="guitars" catalog="system" width="128" height="100"/>
